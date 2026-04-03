@@ -16,12 +16,12 @@ export function SlugTool() {
 
   return (
     <div className="space-y-4">
-      <label className="block text-sm text-slate-300">
+      <label className="block text-sm text-slate-700 dark:text-slate-300">
         Slug
         <input
           readOnly
           value={out}
-          className="mt-2 w-full rounded-xl border border-white/10 bg-black/40 p-3 font-mono text-sm text-cyan-200"
+          className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-950 p-3 font-mono text-sm text-emerald-100 dark:border-white/10 dark:bg-black/40 dark:text-cyan-200"
         />
       </label>
       <textarea className={inputClass} value={text} onChange={(e) => setText(e.target.value)} />

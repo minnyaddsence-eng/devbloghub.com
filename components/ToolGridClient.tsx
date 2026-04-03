@@ -83,6 +83,15 @@ export function ToolGridClient({
   const pageSlice = filtered.slice(start, start + PAGE_SIZE);
   const visible = paginate ? pageSlice : filtered;
 
+  useEffect(() => {
+    if (!paginate) return;
+    if (urlPage > totalPages) {
+      router.replace(gridPath(basePath, q.trim(), totalPages, paginate), { scroll: false });
+    }
+  }, [paginate, urlPage, totalPages, basePath, q, router]);
+
+  const pageNums = useMemo(() => Array.from({ length: totalPages }, (_, i) => i + 1), [totalPages]);
+
   return (
     <div className="mx-auto max-w-6xl min-w-0 px-3 pb-16 sm:px-4 sm:pb-20">
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-4">
@@ -95,7 +104,7 @@ export function ToolGridClient({
             value={q}
             onChange={(e) => setQ(e.target.value)}
             autoComplete="off"
-            className="box-border w-full min-h-11 rounded-xl border border-white/15 bg-black/30 px-3 py-2.5 text-base text-slate-100 outline-none focus:ring-2 focus:ring-cyan-500/40 sm:px-4 sm:py-3 sm:text-sm"
+            className="box-border w-full min-h-11 rounded-xl border border-slate-200/90 bg-white px-3 py-2.5 text-base text-slate-900 outline-none focus:ring-2 focus:ring-sky-400/50 dark:border-white/15 dark:bg-black/30 dark:text-slate-100 dark:focus:ring-cyan-500/40 sm:px-4 sm:py-3 sm:text-sm"
           />
         </label>
         <div
@@ -106,7 +115,7 @@ export function ToolGridClient({
           <button
             type="button"
             onClick={() => setCat(null)}
-            className={`shrink-0 rounded-full px-3 py-2.5 text-sm sm:py-2 ${!cat ? "bg-cyan-600 text-white" : "bg-white/10 text-slate-200"}`}
+            className={`shrink-0 rounded-full px-3 py-2.5 text-sm sm:py-2 ${!cat ? "bg-sky-600 text-white dark:bg-cyan-600" : "bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-200"}`}
           >
             All
           </button>
@@ -115,14 +124,14 @@ export function ToolGridClient({
               key={c}
               type="button"
               onClick={() => setCat(c)}
-              className={`shrink-0 rounded-full px-3 py-2.5 text-sm sm:py-2 ${cat === c ? "bg-cyan-600 text-white" : "bg-white/10 text-slate-200"}`}
+              className={`shrink-0 rounded-full px-3 py-2.5 text-sm sm:py-2 ${cat === c ? "bg-sky-600 text-white dark:bg-cyan-600" : "bg-slate-100 text-slate-700 dark:bg-white/10 dark:text-slate-200"}`}
             >
               {c}
             </button>
           ))}
         </div>
       </div>
-      <p className="mt-3 text-sm text-slate-500" aria-live="polite">
+      <p className="mt-3 text-sm text-slate-600 dark:text-slate-500" aria-live="polite">
         {filtered.length} tool{filtered.length !== 1 ? "s" : ""} shown
         {paginate ? (
           <>
@@ -137,18 +146,18 @@ export function ToolGridClient({
       <ul className="mt-8 grid list-none grid-cols-1 gap-3 p-0 sm:mt-10 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((t) => (
           <li key={t.slug} className="min-w-0">
-            <GlassPanel className="group h-full p-4 transition-colors hover:border-cyan-400/40 hover:bg-white/[0.09] sm:p-5">
+            <GlassPanel className="home-tool-card group h-full p-4 transition-colors hover:border-sky-400/50 hover:bg-sky-50/30 dark:hover:border-cyan-400/40 dark:hover:bg-white/[0.09] sm:p-5">
               <Link
                 href={`/category/${encodeURIComponent(t.category)}`}
-                className="text-xs font-medium uppercase tracking-wide text-cyan-300/80 hover:text-cyan-200"
+                className="text-xs font-medium uppercase tracking-wide text-sky-700 hover:text-sky-900 dark:text-cyan-300/80 dark:hover:text-cyan-200"
               >
                 {t.category}
               </Link>
               <Link href={`/tools/${t.slug}`} className="mt-2 block min-w-0">
-                <h2 className="break-words text-base font-semibold text-white group-hover:text-cyan-200 sm:text-lg">
+                <h2 className="break-words text-base font-semibold text-slate-900 group-hover:text-sky-800 sm:text-lg dark:text-white dark:group-hover:text-cyan-200">
                   {t.name}
                 </h2>
-                <p className="mt-2 line-clamp-3 text-sm text-slate-400">{t.description}</p>
+                <p className="mt-2 line-clamp-3 text-sm text-slate-600 dark:text-slate-400">{t.description}</p>
               </Link>
             </GlassPanel>
           </li>
@@ -157,35 +166,54 @@ export function ToolGridClient({
 
       {paginate && totalPages > 1 ? (
         <nav
-          className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:mt-10"
+          className="mt-8 flex flex-col items-center gap-4 sm:mt-10"
           aria-label="Tools pagination"
         >
-          {page > 1 ? (
-            <Link
-              href={gridPath(basePath, q.trim(), page - 1, true)}
-              scroll={false}
-              className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm text-slate-200 hover:bg-white/10"
-            >
-              Previous
-            </Link>
-          ) : (
-            <span className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm text-slate-600">
-              Previous
-            </span>
-          )}
-          {page < totalPages ? (
-            <Link
-              href={gridPath(basePath, q.trim(), page + 1, true)}
-              scroll={false}
-              className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/5 px-5 py-2 text-sm text-slate-200 hover:bg-white/10"
-            >
-              Next
-            </Link>
-          ) : (
-            <span className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm text-slate-600">
-              Next
-            </span>
-          )}
+          <div className="flex max-w-full flex-wrap justify-center gap-1.5 sm:gap-2">
+            {pageNums.map((num) => (
+              <Link
+                key={num}
+                href={gridPath(basePath, q.trim(), num, paginate)}
+                scroll={false}
+                className={`inline-flex min-h-10 min-w-10 items-center justify-center rounded-full text-sm font-medium ${
+                  num === page
+                    ? "bg-sky-600 text-white dark:bg-cyan-600"
+                    : "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+                }`}
+                aria-current={num === page ? "page" : undefined}
+              >
+                {num}
+              </Link>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {page > 1 ? (
+              <Link
+                href={gridPath(basePath, q.trim(), page - 1, paginate)}
+                scroll={false}
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-200 bg-white px-5 py-2 text-sm text-slate-800 hover:bg-slate-50 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+              >
+                Previous
+              </Link>
+            ) : (
+              <span className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm text-slate-400 dark:text-slate-600">
+                Previous
+              </span>
+            )}
+            {page < totalPages ? (
+              <Link
+                href={gridPath(basePath, q.trim(), page + 1, paginate)}
+                scroll={false}
+                className="inline-flex min-h-11 items-center rounded-full border border-slate-200 bg-white px-5 py-2 text-sm text-slate-800 hover:bg-slate-50 dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+              >
+                Next
+              </Link>
+            ) : (
+              <span className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm text-slate-400 dark:text-slate-600">
+                Next
+              </span>
+            )}
+          </div>
         </nav>
       ) : null}
     </div>

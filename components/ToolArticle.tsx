@@ -80,32 +80,32 @@ export function ToolArticle({
       <FaqJsonLd items={faqAll} />
       <div className="flex min-w-0 flex-col gap-2">
         <Breadcrumbs items={crumbs} />
-        <p className="break-words text-xs text-slate-500">
+        <p className="break-words text-xs text-slate-600 dark:text-slate-500">
           Canonical path:{" "}
-          <Link href={canonicalPath} className="break-all text-cyan-400 hover:underline">
+          <Link href={canonicalPath} className="break-all text-sky-700 hover:underline dark:text-cyan-400">
             {canonicalPath}
           </Link>
         </p>
       </div>
 
       <header className="mt-6 min-w-0">
-        <p className="text-sm font-medium text-cyan-300/80">{tool.category}</p>
-        <h1 className="mt-2 text-balance break-words text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
+        <p className="text-sm font-medium text-sky-700 dark:text-cyan-300/80">{tool.category}</p>
+        <h1 className="mt-2 text-balance break-words text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl dark:text-white">
           {h1}
         </h1>
-        <p className="mt-4 text-base text-slate-300 sm:text-lg">{tool.description}</p>
+        <p className="mt-4 text-base text-slate-700 sm:text-lg dark:text-slate-300">{tool.description}</p>
       </header>
 
       <GlassPanel className="mt-8 min-w-0 p-4 sm:p-5 md:p-6">
-        <h2 className="text-lg font-semibold text-white">Use the tool</h2>
-        <p className="mt-1 text-sm text-slate-400">Runs in your browser — no account required for basic usage.</p>
+        <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Use the tool</h2>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">Runs in your browser — no account required for basic usage.</p>
         <div className="mt-6">
           <ToolRunner tool={tool} />
         </div>
       </GlassPanel>
 
-      <section className="mt-10 max-w-none space-y-4 break-words text-slate-300 sm:mt-12">
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">
+      <section className="mt-10 max-w-none space-y-4 break-words text-slate-700 sm:mt-12 dark:text-slate-300">
+        <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">
           Why {tool.name} matters for everyday developer work
         </h2>
         {paragraphs.map((p, i) => (
@@ -113,23 +113,23 @@ export function ToolArticle({
             {p}
           </p>
         ))}
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">People also ask (quick answers)</h2>
+        <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">People also ask (quick answers)</h2>
         <ul className="list-disc space-y-3 pl-6">
           {extraFaqs.map((f, i) => (
             <li key={i}>
-              <strong className="text-slate-200">{f.q}</strong> — {f.a}
+              <strong className="text-slate-900 dark:text-slate-200">{f.q}</strong> — {f.a}
             </li>
           ))}
         </ul>
-        <h2 className="text-xl font-semibold text-white sm:text-2xl">Related searches on {site.domain}</h2>
+        <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">Related searches on {site.domain}</h2>
         <p className="leading-relaxed">
           Explore complementary utilities in the same session. If you are working with payloads you may also need
           validators, encoders, or generators — browse the grid on the{" "}
-          <Link href="/" className="text-cyan-300 hover:underline">
+          <Link href="/" className="text-sky-700 hover:underline dark:text-cyan-300">
             homepage
           </Link>{" "}
           or open the{" "}
-          <Link href={`/category/${encodeURIComponent(tool.category)}`} className="text-cyan-300 hover:underline">
+          <Link href={`/category/${encodeURIComponent(tool.category)}`} className="text-sky-700 hover:underline dark:text-cyan-300">
             {tool.category} category
           </Link>{" "}
           for more tools like this.
@@ -138,8 +138,8 @@ export function ToolArticle({
 
       <section className="mt-10 grid gap-6 md:grid-cols-2">
         <GlassPanel className="p-5">
-          <h3 className="font-semibold text-white">Other keyword angles</h3>
-          <ul className="mt-3 space-y-2 text-sm text-cyan-200/90">
+          <h3 className="font-semibold text-slate-900 dark:text-white">Other keyword angles</h3>
+          <ul className="mt-3 space-y-2 text-sm text-sky-800 dark:text-cyan-200/90">
             {keywordVariations.map((v) => (
               <li key={v.href}>
                 <Link className="hover:underline" href={v.href}>
@@ -150,14 +150,14 @@ export function ToolArticle({
           </ul>
         </GlassPanel>
         <GlassPanel className="min-w-0 p-4 sm:p-5">
-          <h3 className="font-semibold text-white">Related tools</h3>
-          <ul className="mt-3 space-y-2 text-sm text-slate-300">
+          <h3 className="font-semibold text-slate-900 dark:text-white">Related tools</h3>
+          <ul className="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-300">
             {related.map((r) => (
               <li key={r.slug}>
-                <Link className="text-cyan-300 hover:underline" href={`/tools/${r.slug}`}>
+                <Link className="text-sky-700 hover:underline dark:text-cyan-300" href={`/tools/${r.slug}`}>
                   {r.name}
                 </Link>
-                <span className="text-slate-500"> — {r.category}</span>
+                <span className="text-slate-500 dark:text-slate-500"> — {r.category}</span>
               </li>
             ))}
           </ul>
@@ -166,11 +166,14 @@ export function ToolArticle({
 
       {useCaseVariations.length > 0 && (
         <GlassPanel className="mt-6 min-w-0 p-4 sm:p-5">
-          <h3 className="font-semibold text-white">Same keyword, different scenario</h3>
-          <ul className="mt-3 flex flex-wrap gap-2 text-sm text-amber-200/90 sm:gap-3">
+          <h3 className="font-semibold text-slate-900 dark:text-white">Same keyword, different scenario</h3>
+          <ul className="mt-3 flex flex-wrap gap-2 text-sm text-amber-900 dark:text-amber-200/90 sm:gap-3">
             {useCaseVariations.map((v) => (
               <li key={v.href}>
-                <Link className="rounded-lg border border-white/15 bg-white/5 px-3 py-1 hover:bg-white/10" href={v.href}>
+                <Link
+                  className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 hover:bg-slate-100 dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
+                  href={v.href}
+                >
                   {v.label}
                 </Link>
               </li>

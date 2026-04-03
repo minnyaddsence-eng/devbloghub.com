@@ -26,7 +26,7 @@ export function LineSortDedupe32Tool() {
     <ToolFrame
       actions={
         <>
-          <label className="flex items-center gap-2 text-sm text-slate-300">
+          <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
             <input type="checkbox" checked={dedupe} onChange={(e) => setDedupe(e.target.checked)} />
             Dedupe
           </label>
@@ -46,7 +46,7 @@ export function EmailExtractor33Tool() {
   return (
     <ToolFrame actions={<CopyButton text={emails.join("\n")} label="Copy all" />}>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
-      <ul className="list-disc pl-6 text-sm text-cyan-200">
+      <ul className="list-disc pl-6 text-sm text-sky-800 dark:text-cyan-200">
         {emails.map((e) => (
           <li key={e}>{e}</li>
         ))}
@@ -128,16 +128,16 @@ export function NumberBaseConverter38Tool() {
     <ToolFrame actions={out ? <CopyButton text={out} label="Copy result" /> : null}>
       <div className="flex flex-wrap gap-2 text-sm">
         <input className="rounded border border-white/15 bg-black/40 px-2 py-1 font-mono" value={num} onChange={(e) => setNum(e.target.value)} />
-        <label className="text-slate-300">
+        <label className="text-slate-700 dark:text-slate-300">
           From
           <input type="number" min={2} max={36} className="ml-1 w-14 rounded border border-white/15 bg-black/40 px-1" value={from} onChange={(e) => setFrom(+e.target.value)} />
         </label>
-        <label className="text-slate-300">
+        <label className="text-slate-700 dark:text-slate-300">
           To
           <input type="number" min={2} max={36} className="ml-1 w-14 rounded border border-white/15 bg-black/40 px-1" value={to} onChange={(e) => setTo(+e.target.value)} />
         </label>
       </div>
-      {out && <p className="font-mono text-cyan-300">{out}</p>}
+      {out && <p className="font-mono text-sky-700 dark:text-cyan-300">{out}</p>}
     </ToolFrame>
   );
 }
@@ -172,7 +172,7 @@ export function BinaryDecimalConverter39Tool() {
       }
     >
       <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono" value={v} onChange={(e) => setV(e.target.value)} />
-      {out && <p className="font-mono text-xl text-cyan-300">{out}</p>}
+      {out && <p className="font-mono text-xl text-sky-700 dark:text-cyan-300">{out}</p>}
     </ToolFrame>
   );
 }
@@ -200,7 +200,7 @@ export function IpSubnetCalculator40Tool() {
       {info.kind === "err" ? (
         <p className="text-rose-300">{info.message}</p>
       ) : (
-        <pre className="text-sm text-slate-300">
+        <pre className="text-sm text-slate-700 dark:text-slate-300">
           Network: {info.network}
           {"\n"}
           Broadcast: {info.broadcast}
@@ -231,7 +231,7 @@ export function UserAgentParser41Tool() {
   return (
     <ToolFrame actions={<CopyButton text={hint} label="Copy summary" />}>
       <textarea className={inputClass} value={ua} onChange={(e) => setUa(e.target.value)} />
-      <pre className="whitespace-pre-wrap text-slate-300">{hint}</pre>
+      <pre className="whitespace-pre-wrap text-slate-700 dark:text-slate-300">{hint}</pre>
     </ToolFrame>
   );
 }
@@ -259,7 +259,7 @@ export function MimeTypeLookup42Tool() {
   return (
     <ToolFrame>
       <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3" value={ext} onChange={(e) => setExt(e.target.value)} placeholder="extension" />
-      <p className="text-cyan-300">{mt}</p>
+      <p className="text-sky-700 dark:text-cyan-300">{mt}</p>
     </ToolFrame>
   );
 }
@@ -285,7 +285,7 @@ export function HttpStatusLookup43Tool() {
   return (
     <ToolFrame>
       <input type="number" className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3" value={code} onChange={(e) => setCode(e.target.value)} />
-      <p className="text-lg text-slate-200">
+      <p className="text-lg text-slate-800 dark:text-slate-200">
         {n}: {msg}
       </p>
     </ToolFrame>
@@ -303,7 +303,7 @@ export function MarkdownTableGenerator44Tool() {
   }, [rows, cols]);
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy table" />}>
-      <div className="flex gap-4 text-sm text-slate-300">
+      <div className="flex gap-4 text-sm text-slate-700 dark:text-slate-300">
         <label>
           Rows
           <input type="number" min={2} max={30} className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={rows} onChange={(e) => setRows(+e.target.value)} />
@@ -347,7 +347,7 @@ export function JsonPathTester45Tool() {
     <ToolFrame actions={<CopyButton text={out} label="Copy result" />}>
       <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-2 font-mono" value={path} onChange={(e) => setPath(e.target.value)} placeholder="$.path[0]" />
       <textarea className={inputClass} value={json} onChange={(e) => setJson(e.target.value)} />
-      <pre className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-cyan-100">{out}</pre>
+      <pre className="rounded-xl border border-slate-200 bg-slate-950 dark:border-white/10 dark:bg-black/40 p-3 text-xs text-emerald-100 dark:text-cyan-100">{out}</pre>
     </ToolFrame>
   );
 }

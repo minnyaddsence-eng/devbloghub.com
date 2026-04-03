@@ -36,7 +36,7 @@ export function CopyButton({
       >
         {label}
       </button>
-      <span className="min-h-[1.25rem] text-xs text-slate-400" aria-live="polite">
+      <span className="min-h-[1.25rem] text-xs text-slate-600 dark:text-slate-400" aria-live="polite">
         {hint === "ok" ? "Copied." : hint === "err" ? "Could not copy." : ""}
       </span>
     </span>

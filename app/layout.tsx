@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteSchemas } from "@/components/SiteSchemas";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 import { absoluteOgImageUrl, globalSeoKeywords, twitterSiteFromEnv } from "@/lib/seo-config";
 import { site } from "@/lib/site";
@@ -75,13 +76,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className={`flex min-h-screen flex-col antialiased ${geistSans.className}`}>
-        <GoogleAnalytics />
-        <SiteSchemas />
-        <SiteHeader />
-        <main className="min-w-0 flex-1">{children}</main>
-        <SiteFooter />
+        <ThemeProvider>
+          <GoogleAnalytics />
+          <SiteSchemas />
+          <SiteHeader />
+          <main className="min-w-0 flex-1">{children}</main>
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -15,28 +15,31 @@ export function WordCounterTool() {
     return { words, chars, nospace, lines, minutes };
   }, [text]);
 
+  const statBox =
+    "rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-white/10 dark:bg-black/30";
+
   return (
     <div className="space-y-4">
       <dl className="grid grid-cols-2 gap-3 text-sm md:grid-cols-3">
-        <div className="rounded-xl bg-black/30 p-3">
-          <dt className="text-slate-400">Words</dt>
-          <dd className="text-lg font-semibold text-white">{stats.words}</dd>
+        <div className={statBox}>
+          <dt className="text-slate-500 dark:text-slate-400">Words</dt>
+          <dd className="text-lg font-semibold text-slate-900 dark:text-white">{stats.words}</dd>
         </div>
-        <div className="rounded-xl bg-black/30 p-3">
-          <dt className="text-slate-400">Characters</dt>
-          <dd className="text-lg font-semibold text-white">{stats.chars}</dd>
+        <div className={statBox}>
+          <dt className="text-slate-500 dark:text-slate-400">Characters</dt>
+          <dd className="text-lg font-semibold text-slate-900 dark:text-white">{stats.chars}</dd>
         </div>
-        <div className="rounded-xl bg-black/30 p-3">
-          <dt className="text-slate-400">No spaces</dt>
-          <dd className="text-lg font-semibold text-white">{stats.nospace}</dd>
+        <div className={statBox}>
+          <dt className="text-slate-500 dark:text-slate-400">No spaces</dt>
+          <dd className="text-lg font-semibold text-slate-900 dark:text-white">{stats.nospace}</dd>
         </div>
-        <div className="rounded-xl bg-black/30 p-3">
-          <dt className="text-slate-400">Lines</dt>
-          <dd className="text-lg font-semibold text-white">{stats.lines}</dd>
+        <div className={statBox}>
+          <dt className="text-slate-500 dark:text-slate-400">Lines</dt>
+          <dd className="text-lg font-semibold text-slate-900 dark:text-white">{stats.lines}</dd>
         </div>
-        <div className="rounded-xl bg-black/30 p-3">
-          <dt className="text-slate-400">Reading time</dt>
-          <dd className="text-lg font-semibold text-white">~{Math.max(0.1, stats.minutes).toFixed(1)} min</dd>
+        <div className={statBox}>
+          <dt className="text-slate-500 dark:text-slate-400">Reading time</dt>
+          <dd className="text-lg font-semibold text-slate-900 dark:text-white">~{Math.max(0.1, stats.minutes).toFixed(1)} min</dd>
         </div>
       </dl>
       <textarea className={inputClass} value={text} onChange={(e) => setText(e.target.value)} />

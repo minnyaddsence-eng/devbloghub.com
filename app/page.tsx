@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HomeSpotlights } from "@/components/HomeSpotlights";
-import { HomeHero } from "@/components/HomeHero";
+import { HomeShell } from "@/components/home/HomeShell";
+import { getTools } from "@/lib/tools";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -8,10 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return (
-    <>
-      <HomeHero />
-      <HomeSpotlights />
-    </>
-  );
+  return <HomeShell tools={getTools()} />;
 }

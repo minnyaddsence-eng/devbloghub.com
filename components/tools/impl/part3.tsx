@@ -52,9 +52,9 @@ export function NanoidGenerator53Tool() {
     <ToolFrame actions={<><button className={btnClass} onClick={gen}>Generate</button>{out ? <CopyButton text={out} label="Copy" /> : null}</>}>
       <label className="text-sm text-slate-400">
         Length
-        <input type="number" min={8} max={64} className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={len} onChange={(e) => setLen(+e.target.value)} />
+        <input type="number" min={8} max={64} className="ml-2 w-16 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={len} onChange={(e) => setLen(+e.target.value)} />
       </label>
-      {out && <input readOnly className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono" value={out} />}
+      {out && <input readOnly className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-4 py-3 font-mono" value={out} />}
     </ToolFrame>
   );
 }
@@ -73,9 +73,9 @@ export function OtpGenerator54Tool() {
     <ToolFrame actions={<><button className={btnClass} onClick={gen}>Generate</button>{out ? <CopyButton text={out} label="Copy" /> : null}</>}>
       <label className="text-sm text-slate-400">
         Digits
-        <input type="number" min={4} max={10} className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={digits} onChange={(e) => setDigits(+e.target.value)} />
+        <input type="number" min={4} max={10} className="ml-2 w-16 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={digits} onChange={(e) => setDigits(+e.target.value)} />
       </label>
-      {out && <p className="text-2xl font-mono text-cyan-300">{out}</p>}
+      {out && <p className="text-2xl font-mono text-sky-700 dark:text-cyan-300">{out}</p>}
     </ToolFrame>
   );
 }
@@ -90,9 +90,9 @@ export function TotpQrBuilder55Tool() {
   );
   return (
     <ToolFrame actions={<CopyButton text={uri} label="Copy otpauth URI" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={secret} onChange={(e) => setSecret(e.target.value)} placeholder="Base32 secret" />
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={label} onChange={(e) => setLabel(e.target.value)} />
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={issuer} onChange={(e) => setIssuer(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={secret} onChange={(e) => setSecret(e.target.value)} placeholder="Base32 secret" />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={label} onChange={(e) => setLabel(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={issuer} onChange={(e) => setIssuer(e.target.value)} />
       <textarea className={inputClass} readOnly value={uri} />
     </ToolFrame>
   );
@@ -129,7 +129,7 @@ export function HmacHelper49Tool() {
   };
   return (
     <ToolFrame actions={<><button className={btnClass} onClick={run}>HMAC-SHA256 hex</button>{out ? <CopyButton text={out} label="Copy" /> : null}</>}>
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={secret} onChange={(e) => setSecret(e.target.value)} placeholder="Secret" />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={secret} onChange={(e) => setSecret(e.target.value)} placeholder="Secret" />
       <textarea className={inputClass} value={msg} onChange={(e) => setMsg(e.target.value)} />
       {out && <textarea className={inputClass} readOnly value={out} />}
     </ToolFrame>
@@ -153,7 +153,7 @@ export function PemDecoder50Tool() {
   return (
     <ToolFrame>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
-      <p className="text-sm text-slate-300">{body}</p>
+      <p className="text-sm text-slate-700 dark:text-slate-300">{body}</p>
     </ToolFrame>
   );
 }
@@ -164,7 +164,7 @@ export function CsrParser51Tool() {
     <ToolFrame>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
       <p className="text-sm text-slate-400">PEM CSR viewer: paste CSR; ASN.1 parsing needs a library — here you validate PEM framing only.</p>
-      <p className="text-xs font-mono text-cyan-200/80">
+      <p className="text-xs font-mono text-sky-800 dark:text-cyan-200/80">
         {/BEGIN CERTIFICATE REQUEST/.test(t) && /END CERTIFICATE REQUEST/.test(t) ? "PEM frame looks OK." : "Missing CSR PEM headers."}
       </p>
     </ToolFrame>
@@ -188,7 +188,7 @@ export function PasswordStrengthMeter56Tool() {
   const { score, label } = useMemo(() => scorePassword(p), [p]);
   return (
     <ToolFrame>
-      <input type="password" className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3" value={p} onChange={(e) => setP(e.target.value)} />
+      <input type="password" className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-4 py-3" value={p} onChange={(e) => setP(e.target.value)} />
       <p className="text-lg">
         {label} <span className="text-slate-500">({score}/6 checks)</span>
       </p>
@@ -272,9 +272,9 @@ export function EditorconfigGenerator60Tool() {
   const out = `root = true\n\n[*]\nindent_style = space\nindent_size = ${indent}\nend_of_line = lf\ncharset = utf-8\ninsert_final_newline = true`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <label className="text-slate-300">
+      <label className="text-slate-700 dark:text-slate-300">
         indent_size
-        <input type="number" min={2} max={8} className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={indent} onChange={(e) => setIndent(+e.target.value)} />
+        <input type="number" min={2} max={8} className="ml-2 w-16 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={indent} onChange={(e) => setIndent(+e.target.value)} />
       </label>
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
@@ -331,8 +331,8 @@ export function SemverCalculator62Tool() {
         </>
       }
     >
-      <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono" value={v} onChange={(e) => setV(e.target.value)} />
-      {out && <p className="text-xl text-cyan-300">{out}</p>}
+      <input className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-4 py-3 font-mono" value={v} onChange={(e) => setV(e.target.value)} />
+      {out && <p className="text-xl text-sky-700 dark:text-cyan-300">{out}</p>}
     </ToolFrame>
   );
 }
@@ -343,7 +343,7 @@ export function ChangelogFormatter63Tool() {
   const out = `## [Unreleased] - ${date}\n\n### ${title}\n- your bullet here\n`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={title} onChange={(e) => setTitle(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -355,7 +355,7 @@ export function BranchNameSlugger64Tool() {
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy branch name" />}>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
-      <p className="font-mono text-cyan-300">{out}</p>
+      <p className="font-mono text-sky-700 dark:text-cyan-300">{out}</p>
     </ToolFrame>
   );
 }
@@ -399,9 +399,9 @@ export function BadgeGenerator66Tool() {
   return (
     <ToolFrame actions={<CopyButton text={`[![${label}](${url})](https://devbloghub.com)`} label="Copy markdown" />}>
       <div className="flex flex-wrap gap-2">
-        <input className="rounded border border-white/15 bg-black/40 px-2 py-1" value={label} onChange={(e) => setLabel(e.target.value)} />
-        <input className="rounded border border-white/15 bg-black/40 px-2 py-1" value={msg} onChange={(e) => setMsg(e.target.value)} />
-        <input className="rounded border border-white/15 bg-black/40 px-2 py-1" value={color} onChange={(e) => setColor(e.target.value)} />
+        <input className="rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-2 py-1" value={label} onChange={(e) => setLabel(e.target.value)} />
+        <input className="rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-2 py-1" value={msg} onChange={(e) => setMsg(e.target.value)} />
+        <input className="rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-2 py-1" value={color} onChange={(e) => setColor(e.target.value)} />
       </div>
       <p className="break-all text-xs text-slate-400">{url}</p>
     </ToolFrame>
@@ -414,8 +414,8 @@ export function RobotsRuleBuilder67Tool() {
   const out = `User-agent: ${ua}\nDisallow: ${dis}\n`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={ua} onChange={(e) => setUa(e.target.value)} />
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={dis} onChange={(e) => setDis(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={ua} onChange={(e) => setUa(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={dis} onChange={(e) => setDis(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -426,7 +426,7 @@ export function CanonicalUrlBuilder68Tool() {
   const out = `<link rel="canonical" href="${u}" />`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3" value={u} onChange={(e) => setU(e.target.value)} />
+      <input className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-4 py-3" value={u} onChange={(e) => setU(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -438,8 +438,8 @@ export function HreflangTagBuilder69Tool() {
   const out = `<link rel="alternate" hreflang="en" href="${en}" />\n<link rel="alternate" hreflang="bn" href="${bn}" />\n<link rel="alternate" hreflang="x-default" href="${en}" />\n`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={en} onChange={(e) => setEn(e.target.value)} placeholder="en URL" />
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={bn} onChange={(e) => setBn(e.target.value)} placeholder="bn URL" />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={en} onChange={(e) => setEn(e.target.value)} placeholder="en URL" />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={bn} onChange={(e) => setBn(e.target.value)} placeholder="bn URL" />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -459,7 +459,7 @@ export function JsonLdFaqBuilder70Tool() {
   );
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy JSON-LD" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={q} onChange={(e) => setQ(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={q} onChange={(e) => setQ(e.target.value)} />
       <textarea className={inputClass} value={a} onChange={(e) => setA(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
@@ -588,9 +588,9 @@ export function ContentTypeBuilder79Tool() {
   const out = b ? `${t}; ${b}` : t;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={t} onChange={(e) => setT(e.target.value)} />
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={b} onChange={(e) => setB(e.target.value)} />
-      <p className="font-mono text-cyan-200">{out}</p>
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={t} onChange={(e) => setT(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={b} onChange={(e) => setB(e.target.value)} />
+      <p className="font-mono text-sky-800 dark:text-cyan-200">{out}</p>
     </ToolFrame>
   );
 }
@@ -601,15 +601,15 @@ export function CacheControlBuilder80Tool() {
   const out = `${pub ? "public" : "private"}, max-age=${max}`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <label className="flex items-center gap-2 text-sm text-slate-300">
+      <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
         <input type="checkbox" checked={pub} onChange={(e) => setPub(e.target.checked)} />
         public
       </label>
-      <label className="text-sm text-slate-300">
+      <label className="text-sm text-slate-700 dark:text-slate-300">
         max-age (seconds)
-        <input type="number" min={0} className="ml-2 w-28 rounded border border-white/15 bg-black/40 px-2 py-1" value={max} onChange={(e) => setMax(+e.target.value)} />
+        <input type="number" min={0} className="ml-2 w-28 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-2 py-1" value={max} onChange={(e) => setMax(+e.target.value)} />
       </label>
-      <p className="font-mono text-cyan-200">{out}</p>
+      <p className="font-mono text-sky-800 dark:text-cyan-200">{out}</p>
     </ToolFrame>
   );
 }
@@ -666,8 +666,8 @@ export function SlugCollisionChecker85Tool() {
   const clash = sa === sb && sa.length > 0;
   return (
     <ToolFrame>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={a} onChange={(e) => setA(e.target.value)} />
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={b} onChange={(e) => setB(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={a} onChange={(e) => setA(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={b} onChange={(e) => setB(e.target.value)} />
       <p>
         <span className="text-slate-400">{sa}</span> vs <span className="text-slate-400">{sb}</span>
       </p>
@@ -698,7 +698,7 @@ export function MetaDescriptionPreview87Tool() {
     <ToolFrame>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
       <p className="text-sm text-slate-400">{len} chars {len > 160 ? "(often aim ≤~160)" : ""}</p>
-      <div className="rounded-lg border border-white/15 bg-black/40 p-3 text-sm text-slate-300">Google-style snippet: {snippet}{len > 160 ? "…" : ""}</div>
+      <div className="rounded-lg border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 p-3 text-sm text-slate-700 dark:text-slate-300">Google-style snippet: {snippet}{len > 160 ? "…" : ""}</div>
     </ToolFrame>
   );
 }
@@ -709,8 +709,8 @@ export function OpenGraphTagBuilder88Tool() {
   const out = `<meta property="og:title" content="${titleV.replace(/"/g, "&quot;")}" />\n<meta property="og:url" content="${url}" />\n<meta property="og:type" content="website" />\n`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="mb-2 w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={titleV} onChange={(e) => setTitleV(e.target.value)} />
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={url} onChange={(e) => setUrl(e.target.value)} />
+      <input className="mb-2 w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={titleV} onChange={(e) => setTitleV(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={url} onChange={(e) => setUrl(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -721,7 +721,7 @@ export function TwitterCardBuilder89Tool() {
   const out = `<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${titleV.replace(/"/g, "&quot;")}" />\n`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2" value={titleV} onChange={(e) => setTitleV(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2" value={titleV} onChange={(e) => setTitleV(e.target.value)} />
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
   );
@@ -751,7 +751,7 @@ export function RssItemCounter91Tool() {
   return (
     <ToolFrame>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
-      <p className="text-xl text-cyan-300">&lt;item&gt; count: {n}</p>
+      <p className="text-xl text-sky-700 dark:text-cyan-300">&lt;item&gt; count: {n}</p>
     </ToolFrame>
   );
 }
@@ -790,8 +790,8 @@ export function CronNextRuns93Tool() {
   }, [c]);
   return (
     <ToolFrame>
-      <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono" value={c} onChange={(e) => setC(e.target.value)} />
-      <p className="text-slate-300">{note}</p>
+      <input className="w-full rounded-xl border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-4 py-3 font-mono" value={c} onChange={(e) => setC(e.target.value)} />
+      <p className="text-slate-700 dark:text-slate-300">{note}</p>
     </ToolFrame>
   );
 }
@@ -849,10 +849,10 @@ export function ColorPaletteSteps95Tool() {
   }, [hex, steps]);
   return (
     <ToolFrame actions={<CopyButton text={palette.join("\n")} label="Copy hex list" />}>
-      <input className="w-full rounded border border-white/15 bg-black/40 px-3 py-2 font-mono" value={hex} onChange={(e) => setHex(e.target.value)} />
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2 font-mono" value={hex} onChange={(e) => setHex(e.target.value)} />
       <label className="text-sm text-slate-400">
         Steps
-        <input type="number" min={2} max={12} className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={steps} onChange={(e) => setSteps(+e.target.value)} />
+        <input type="number" min={2} max={12} className="ml-2 w-16 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={steps} onChange={(e) => setSteps(+e.target.value)} />
       </label>
       <div className="flex flex-wrap gap-2">
         {palette.map((h) => (
@@ -887,10 +887,10 @@ export function ContrastRatioQuick96Tool() {
   return (
     <ToolFrame>
       <div className="flex gap-2">
-        <input className="flex-1 rounded border border-white/15 bg-black/40 px-3 py-2 font-mono" value={a} onChange={(e) => setA(e.target.value)} />
-        <input className="flex-1 rounded border border-white/15 bg-black/40 px-3 py-2 font-mono" value={b} onChange={(e) => setB(e.target.value)} />
+        <input className="flex-1 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2 font-mono" value={a} onChange={(e) => setA(e.target.value)} />
+        <input className="flex-1 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-3 py-2 font-mono" value={b} onChange={(e) => setB(e.target.value)} />
       </div>
-      {ratio !== null && <p className="text-xl text-cyan-300">Contrast ratio: {ratio}:1 (WCAG text needs ~4.5:1 for AA normal)</p>}
+      {ratio !== null && <p className="text-xl text-sky-700 dark:text-cyan-300">Contrast ratio: {ratio}:1 (WCAG text needs ~4.5:1 for AA normal)</p>}
     </ToolFrame>
   );
 }
@@ -905,9 +905,9 @@ export function GradientCssBuilder97Tool() {
       <div className="flex flex-wrap gap-2">
         <input type="color" value={c1} onChange={(e) => setC1(e.target.value)} aria-label="Color 1" />
         <input type="color" value={c2} onChange={(e) => setC2(e.target.value)} aria-label="Color 2" />
-        <label className="text-slate-300">
+        <label className="text-slate-700 dark:text-slate-300">
           deg
-          <input type="number" className="ml-2 w-16 rounded border border-white/15 bg-black/40 px-1" value={deg} onChange={(e) => setDeg(+e.target.value)} />
+          <input type="number" className="ml-2 w-16 rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={deg} onChange={(e) => setDeg(+e.target.value)} />
         </label>
       </div>
       <div className="h-16 w-full rounded-lg border border-white/20" style={{ background: `linear-gradient(${deg}deg, ${c1}, ${c2})` }} />
@@ -925,22 +925,22 @@ export function BoxShadowGenerator98Tool() {
   const out = `box-shadow: ${x}px ${y}px ${blur}px ${spread}px ${col};`;
   return (
     <ToolFrame actions={<CopyButton text={out} label="Copy CSS" />}>
-      <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 md:grid-cols-5">
+      <div className="grid grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300 md:grid-cols-5">
         <label>
-          x <input type="number" className="w-full rounded border border-white/15 bg-black/40 px-1" value={x} onChange={(e) => setX(+e.target.value)} />
+          x <input type="number" className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={x} onChange={(e) => setX(+e.target.value)} />
         </label>
         <label>
-          y <input type="number" className="w-full rounded border border-white/15 bg-black/40 px-1" value={y} onChange={(e) => setY(+e.target.value)} />
+          y <input type="number" className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={y} onChange={(e) => setY(+e.target.value)} />
         </label>
         <label>
-          blur <input type="number" className="w-full rounded border border-white/15 bg-black/40 px-1" value={blur} onChange={(e) => setBlur(+e.target.value)} />
+          blur <input type="number" className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={blur} onChange={(e) => setBlur(+e.target.value)} />
         </label>
         <label>
-          spread <input type="number" className="w-full rounded border border-white/15 bg-black/40 px-1" value={spread} onChange={(e) => setSpread(+e.target.value)} />
+          spread <input type="number" className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-1" value={spread} onChange={(e) => setSpread(+e.target.value)} />
         </label>
       </div>
-      <input className="w-full rounded border border-white/15 bg-black/40 px-2 py-1 text-sm" value={col} onChange={(e) => setCol(e.target.value)} placeholder="color" />
-      <div className="flex h-24 items-center justify-center rounded-xl bg-white/5">
+      <input className="w-full rounded border border-slate-300 bg-white text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100 px-2 py-1 text-sm" value={col} onChange={(e) => setCol(e.target.value)} placeholder="color" />
+      <div className="flex h-24 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5">
         <div className="h-12 w-24 rounded-lg bg-cyan-600" style={{ boxShadow: `${x}px ${y}px ${blur}px ${spread}px ${col}` }} />
       </div>
       <textarea className={inputClass} readOnly value={out} />
@@ -951,47 +951,47 @@ export function BoxShadowGenerator98Tool() {
 export function FlexboxCheatSheet99Tool() {
   return (
     <ToolFrame>
-      <div className="max-h-[28rem] space-y-4 overflow-y-auto text-sm text-slate-300">
+      <div className="max-h-[28rem] space-y-4 overflow-y-auto text-sm text-slate-700 dark:text-slate-300">
         <section>
-          <h3 className="font-semibold text-white">Container</h3>
+          <h3 className="font-semibold text-slate-900 dark:text-white">Container</h3>
           <ul className="list-disc pl-5">
             <li>
-              <code className="text-cyan-200">display: flex</code> — flex container
+              <code className="text-sky-800 dark:text-cyan-200">display: flex</code> — flex container
             </li>
             <li>
-              <code className="text-cyan-200">flex-direction</code>: row | column | row-reverse | column-reverse
+              <code className="text-sky-800 dark:text-cyan-200">flex-direction</code>: row | column | row-reverse | column-reverse
             </li>
             <li>
-              <code className="text-cyan-200">flex-wrap</code>: nowrap | wrap | wrap-reverse
+              <code className="text-sky-800 dark:text-cyan-200">flex-wrap</code>: nowrap | wrap | wrap-reverse
             </li>
             <li>
-              <code className="text-cyan-200">justify-content</code>: flex-start | center | flex-end | space-between | space-around | space-evenly
+              <code className="text-sky-800 dark:text-cyan-200">justify-content</code>: flex-start | center | flex-end | space-between | space-around | space-evenly
             </li>
             <li>
-              <code className="text-cyan-200">align-items</code>: stretch | flex-start | center | flex-end | baseline
+              <code className="text-sky-800 dark:text-cyan-200">align-items</code>: stretch | flex-start | center | flex-end | baseline
             </li>
             <li>
-              <code className="text-cyan-200">align-content</code> — multi-line cross-axis
+              <code className="text-sky-800 dark:text-cyan-200">align-content</code> — multi-line cross-axis
             </li>
             <li>
-              <code className="text-cyan-200">gap</code> — spacing between items
+              <code className="text-sky-800 dark:text-cyan-200">gap</code> — spacing between items
             </li>
           </ul>
         </section>
         <section>
-          <h3 className="font-semibold text-white">Items</h3>
+          <h3 className="font-semibold text-slate-900 dark:text-white">Items</h3>
           <ul className="list-disc pl-5">
             <li>
-              <code className="text-cyan-200">flex-grow</code>, <code className="text-cyan-200">flex-shrink</code>, <code className="text-cyan-200">flex-basis</code>
+              <code className="text-sky-800 dark:text-cyan-200">flex-grow</code>, <code className="text-sky-800 dark:text-cyan-200">flex-shrink</code>, <code className="text-sky-800 dark:text-cyan-200">flex-basis</code>
             </li>
             <li>
-              <code className="text-cyan-200">flex</code>: shorthand (e.g. <code className="text-cyan-200">1 1 auto</code>)
+              <code className="text-sky-800 dark:text-cyan-200">flex</code>: shorthand (e.g. <code className="text-sky-800 dark:text-cyan-200">1 1 auto</code>)
             </li>
             <li>
-              <code className="text-cyan-200">align-self</code> — override on one item
+              <code className="text-sky-800 dark:text-cyan-200">align-self</code> — override on one item
             </li>
             <li>
-              <code className="text-cyan-200">order</code> — visual order
+              <code className="text-sky-800 dark:text-cyan-200">order</code> — visual order
             </li>
           </ul>
         </section>

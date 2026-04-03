@@ -44,7 +44,7 @@ export function PasswordTool() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-200">
+      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-800 dark:text-slate-200">
         <label className="flex items-center gap-2">
           Length
           <input
@@ -53,7 +53,7 @@ export function PasswordTool() {
             max={128}
             value={len}
             onChange={(e) => setLen(Number(e.target.value))}
-            className="w-24 rounded border border-white/15 bg-black/40 px-2 py-1"
+            className="w-24 rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100"
           />
         </label>
         <label className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export function PasswordTool() {
         </button>
         {out ? <CopyButton text={out} label="Copy password" /> : null}
       </div>
-      <label className="block text-sm text-slate-400">
+      <label className="block text-sm text-slate-600 dark:text-slate-400">
         Generated password
         <textarea className={`${inputClass} mt-1`} readOnly value={out} placeholder="Your password appears here" />
       </label>

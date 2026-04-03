@@ -55,46 +55,54 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="mx-auto max-w-3xl min-w-0 px-3 py-8 sm:px-4 sm:py-12">
       <BlogArticleJsonLd post={post} />
-      <p className="text-sm text-cyan-300/80">Blog · {post.date}</p>
-      <h1 className="mt-3 text-balance break-words text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+      <p className="text-sm font-medium text-sky-700 dark:text-cyan-300/80">Blog · {post.date}</p>
+      <h1 className="mt-3 text-balance break-words text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl dark:text-white">
         {post.title}
       </h1>
-      <p className="mt-4 text-base text-slate-300 sm:text-lg">{post.description}</p>
+      <p className="mt-4 text-base text-slate-700 sm:text-lg dark:text-slate-300">{post.description}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {post.tags.map((t) => (
-          <span key={t} className="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-200">
+          <span key={t} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-800 dark:bg-white/10 dark:text-slate-200">
             {t}
           </span>
         ))}
       </div>
 
-      <div className="mt-8 max-w-none space-y-8 break-words text-slate-300 sm:mt-10">
+      <div className="mt-8 max-w-none space-y-8 break-words text-slate-700 sm:mt-10 dark:text-slate-300">
         {post.sections.map((s) => (
           <section key={s.heading}>
-            <h2 className="text-xl font-semibold text-white sm:text-2xl">{s.heading}</h2>
+            <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">{s.heading}</h2>
             <p className="mt-3 leading-relaxed">{s.body}</p>
           </section>
         ))}
       </div>
 
       <GlassPanel className="mt-10 min-w-0 p-4 sm:mt-12 sm:p-6">
-        <h3 className="text-lg font-semibold text-white">Try these tools next</h3>
-        <ul className="mt-4 space-y-4 text-cyan-200/90 sm:space-y-3">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Try these tools next</h3>
+        <ul className="mt-4 space-y-4 text-sky-800 sm:space-y-3 dark:text-cyan-200/90">
           {post.relatedToolSlugs.map((ts) => {
             const tool = getToolBySlug(ts);
             if (!tool) return null;
             return (
               <li key={ts} className="break-words">
-                <Link href={`/tools/${tool.slug}`} className="font-medium hover:underline">
+                <Link href={`/tools/${tool.slug}`} className="font-medium text-sky-800 hover:underline dark:text-cyan-200/90">
                   {tool.name}
                 </Link>
-                <span className="mt-1 block text-sm text-slate-500 sm:mt-0 sm:inline"> — {tool.description}</span>
+                <span className="mt-1 block text-sm text-slate-600 sm:mt-0 sm:inline dark:text-slate-500"> — {tool.description}</span>
               </li>
             );
           })}
         </ul>
-        <p className="mt-6 text-sm text-slate-400">
-          Back to <Link href="/">all tools</Link> or browse the <Link href="/blog">blog index</Link>.
+        <p className="mt-6 text-sm text-slate-600 dark:text-slate-400">
+          Back to{" "}
+          <Link href="/" className="text-sky-700 underline-offset-2 hover:underline dark:text-cyan-300">
+            all tools
+          </Link>{" "}
+          or browse the{" "}
+          <Link href="/blog" className="text-sky-700 underline-offset-2 hover:underline dark:text-cyan-300">
+            blog index
+          </Link>
+          .
         </p>
       </GlassPanel>
     </article>

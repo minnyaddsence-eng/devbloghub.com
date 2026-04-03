@@ -30,33 +30,32 @@ export function JwtTool() {
     return { header: decodePart(h), payload: decodePart(p) };
   }, [jwt]);
 
+  const preClass =
+    "max-h-64 overflow-auto rounded-xl border border-slate-200 bg-slate-950 p-3 text-xs text-emerald-100 dark:border-white/10 dark:bg-black/40 dark:text-cyan-100";
+
   return (
     <div className="space-y-4">
-      <p className="text-sm text-amber-200/90">
+      <p className="text-sm text-amber-900 dark:text-amber-200/90">
         Signature is not verified. Never paste production secrets you cannot rotate.
       </p>
-      <label className="block text-sm text-slate-400">
+      <label className="block text-sm text-slate-600 dark:text-slate-400">
         JWT string
         <textarea className={`${inputClass} mt-1`} value={jwt} onChange={(e) => setJwt(e.target.value)} spellCheck={false} />
       </label>
       <div className="grid gap-4 md:grid-cols-2">
         <div>
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <h3 className="text-sm font-medium text-slate-300">Header</h3>
+            <h3 className="text-sm font-medium text-slate-800 dark:text-slate-300">Header</h3>
             {parts.header ? <CopyButton text={parts.header} label="Copy header" /> : null}
           </div>
-          <pre className="max-h-64 overflow-auto rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-cyan-100">
-            {parts.header}
-          </pre>
+          <pre className={preClass}>{parts.header}</pre>
         </div>
         <div>
           <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <h3 className="text-sm font-medium text-slate-300">Payload</h3>
+            <h3 className="text-sm font-medium text-slate-800 dark:text-slate-300">Payload</h3>
             {parts.payload ? <CopyButton text={parts.payload} label="Copy payload" /> : null}
           </div>
-          <pre className="max-h-64 overflow-auto rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-cyan-100">
-            {parts.payload}
-          </pre>
+          <pre className={preClass}>{parts.payload}</pre>
         </div>
       </div>
     </div>

@@ -27,23 +27,23 @@ export function TimestampTool() {
         </button>
       </div>
       <input
-        className="w-full rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-sm text-slate-100 outline-none focus:ring-2 focus:ring-cyan-500/40"
+        className="w-full rounded-xl border border-slate-200 bg-white p-4 font-mono text-sm text-slate-900 outline-none focus:ring-2 focus:ring-sky-400/50 dark:border-white/10 dark:bg-black/30 dark:text-slate-100 dark:focus:ring-cyan-500/40"
         value={raw}
         onChange={(e) => setRaw(e.target.value)}
         inputMode="numeric"
       />
       {"error" in parsed && parsed.error ? (
-        <p className="text-sm text-rose-300">{parsed.error}</p>
+        <p className="text-sm text-rose-700 dark:text-rose-300">{parsed.error}</p>
       ) : (
-        <div className="space-y-2 rounded-xl border border-white/10 bg-black/20 p-4 text-sm text-slate-200">
+        <div className="space-y-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-800 dark:border-white/10 dark:bg-black/20 dark:text-slate-200">
           <p>
-            <span className="text-slate-400">ISO:</span> {parsed.iso}
+            <span className="text-slate-500 dark:text-slate-400">ISO:</span> {parsed.iso}
           </p>
           <p>
-            <span className="text-slate-400">Local:</span> {parsed.local}
+            <span className="text-slate-500 dark:text-slate-400">Local:</span> {parsed.local}
           </p>
           <p>
-            <span className="text-slate-400">Milliseconds:</span> {parsed.ms}
+            <span className="text-slate-500 dark:text-slate-400">Milliseconds:</span> {parsed.ms}
           </p>
         </div>
       )}

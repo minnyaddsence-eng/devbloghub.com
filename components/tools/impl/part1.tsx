@@ -89,7 +89,7 @@ export function RegexTesterTool() {
       )}
       <textarea className={inputClass} value={text} onChange={(e) => setText(e.target.value)} />
       {result.ok && (
-        <pre className="max-h-48 overflow-auto rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-cyan-100">
+        <pre className="max-h-48 overflow-auto rounded-xl border border-slate-200 bg-slate-950 dark:border-white/10 dark:bg-black/40 p-3 text-xs text-emerald-100 dark:text-cyan-100">
           {JSON.stringify(result.m.map((x) => x[0]), null, 2)}
         </pre>
       )}
@@ -169,7 +169,7 @@ export function ColorConverterTool() {
             className="h-12 w-12 rounded-lg border border-white/20"
             style={{ backgroundColor: hex.startsWith("#") ? hex : `#${hex}` }}
           />
-          <p className="text-slate-300">
+          <p className="text-slate-700 dark:text-slate-300">
             {info.rgb}
             <br />
             {info.hsl}
@@ -203,7 +203,10 @@ export function MarkdownPreviewTool() {
     <ToolFrame>
       <div className="grid gap-4 md:grid-cols-2">
         <textarea className={inputClass} value={md} onChange={(e) => setMd(e.target.value)} />
-        <div className="min-h-[200px] rounded-xl border border-white/10 bg-black/30 p-4 text-slate-200 prose-invert" dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          className="min-h-[200px] rounded-xl border border-slate-200 bg-white p-4 text-slate-800 [&_a]:text-sky-700 [&_code]:text-sky-800 dark:border-white/10 dark:bg-black/30 dark:text-slate-200 dark:[&_a]:text-sky-700 dark:text-cyan-300 dark:[&_code]:text-cyan-200"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       </div>
     </ToolFrame>
   );
@@ -231,16 +234,16 @@ export function TextDiffTool() {
         <textarea className={inputClass} value={a} onChange={(e) => setA(e.target.value)} />
         <textarea className={inputClass} value={b} onChange={(e) => setB(e.target.value)} />
       </div>
-      <div className="max-h-64 overflow-auto rounded-xl border border-white/10 font-mono text-xs">
+      <div className="max-h-64 overflow-auto rounded-xl border border-slate-200 font-mono text-xs dark:border-white/10">
         {rows.map((r, i) =>
           r.type === "eq" ? (
-            <div key={i} className="border-b border-white/5 px-2 py-0.5 text-slate-400">
+            <div key={i} className="border-b border-slate-200 px-2 py-0.5 text-slate-600 dark:border-white/5 dark:text-slate-400">
               {r.left}
             </div>
           ) : (
-            <div key={i} className="border-b border-white/5">
-              <div className="bg-rose-500/20 px-2 py-0.5 text-red-200">- {r.left}</div>
-              <div className="bg-emerald-500/20 px-2 py-0.5 text-emerald-200">+ {r.right}</div>
+            <div key={i} className="border-b border-slate-200 dark:border-white/5">
+              <div className="bg-rose-100 px-2 py-0.5 text-red-800 dark:bg-rose-500/20 dark:text-red-200">- {r.left}</div>
+              <div className="bg-emerald-100 px-2 py-0.5 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-200">+ {r.right}</div>
             </div>
           ),
         )}
@@ -262,16 +265,16 @@ export function RandomNumberTool() {
   return (
     <ToolFrame actions={<button className={btnClass} onClick={roll}>Roll</button>}>
       <div className="flex flex-wrap gap-4 text-sm">
-        <label className="flex items-center gap-2 text-slate-300">
+        <label className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
           Min
-          <input type="number" className="w-24 rounded border border-white/15 bg-black/40 px-2 py-1" value={min} onChange={(e) => setMin(+e.target.value)} />
+          <input type="number" className="w-24 rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100" value={min} onChange={(e) => setMin(+e.target.value)} />
         </label>
-        <label className="flex items-center gap-2 text-slate-300">
+        <label className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
           Max
-          <input type="number" className="w-24 rounded border border-white/15 bg-black/40 px-2 py-1" value={max} onChange={(e) => setMax(+e.target.value)} />
+          <input type="number" className="w-24 rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100" value={max} onChange={(e) => setMax(+e.target.value)} />
         </label>
       </div>
-      {n !== null && <p className="text-2xl font-bold text-cyan-300">{n}</p>}
+      {n !== null && <p className="text-2xl font-bold text-sky-700 dark:text-cyan-300">{n}</p>}
     </ToolFrame>
   );
 }
@@ -286,7 +289,7 @@ export function LoremIpsumTool() {
     <ToolFrame actions={<CopyButton text={out} label="Copy" />}>
       <label className="text-sm text-slate-400">
         Paragraphs
-        <input type="number" min={1} max={50} className="ml-2 w-20 rounded border border-white/15 bg-black/40 px-2 py-1" value={p} onChange={(e) => setP(+e.target.value)} />
+        <input type="number" min={1} max={50} className="ml-2 w-20 rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100" value={p} onChange={(e) => setP(+e.target.value)} />
       </label>
       <textarea className={inputClass} readOnly value={out} />
     </ToolFrame>
@@ -400,10 +403,10 @@ export function QueryStringParserTool() {
   return (
     <ToolFrame actions={<CopyButton text={JSON.stringify(parsed, null, 2)} label="Copy JSON" />}>
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
-      <pre className="rounded-xl border border-white/10 bg-black/40 p-3 text-xs text-cyan-100">{JSON.stringify(parsed, null, 2)}</pre>
+      <pre className="rounded-xl border border-slate-200 bg-slate-950 dark:border-white/10 dark:bg-black/40 p-3 text-xs text-emerald-100 dark:text-cyan-100">{JSON.stringify(parsed, null, 2)}</pre>
       <div className="flex flex-wrap gap-2 text-sm">
-        <input className="rounded border border-white/15 bg-black/40 px-2 py-1" value={buildKey} onChange={(e) => setBuildKey(e.target.value)} placeholder="key" />
-        <input className="rounded border border-white/15 bg-black/40 px-2 py-1" value={buildVal} onChange={(e) => setBuildVal(e.target.value)} placeholder="value" />
+        <input className="rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100" value={buildKey} onChange={(e) => setBuildKey(e.target.value)} placeholder="key" />
+        <input className="rounded border border-slate-300 bg-white px-2 py-1 text-slate-900 dark:border-white/15 dark:bg-black/40 dark:text-slate-100" value={buildVal} onChange={(e) => setBuildVal(e.target.value)} placeholder="value" />
       </div>
       <p className="text-sm text-slate-400">Built string: {built}</p>
     </ToolFrame>
@@ -471,7 +474,7 @@ export function HexEncodeTool() {
     >
       <textarea className={inputClass} value={t} onChange={(e) => setT(e.target.value)} />
       <textarea className={inputClass} readOnly value={enc} />
-      {decOut && <p className="text-sm text-slate-300">{decOut}</p>}
+      {decOut && <p className="text-sm text-slate-700 dark:text-slate-300">{decOut}</p>}
     </ToolFrame>
   );
 }
@@ -592,7 +595,7 @@ export function CronExplainerTool() {
   return (
     <ToolFrame actions={<CopyButton text={explain} label="Copy summary" />}>
       <input className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 font-mono" value={c} onChange={(e) => setC(e.target.value)} />
-      <p className="text-slate-300">{explain}</p>
+      <p className="text-slate-700 dark:text-slate-300">{explain}</p>
     </ToolFrame>
   );
 }

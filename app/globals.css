@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --page-glow-1: rgba(59, 130, 246, 0.14);
+  --page-glow-2: rgba(168, 85, 247, 0.1);
+  --page-glow-3: rgba(34, 211, 238, 0.08);
+}
+
+html.dark {
   --glass: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.18);
+  --page-glow-1: rgba(59, 130, 246, 0.22);
+  --page-glow-2: rgba(168, 85, 247, 0.14);
+  --page-glow-3: rgba(34, 211, 238, 0.1);
 }
 
 html {
@@ -13,11 +26,25 @@ html {
 }
 
 body {
-  @apply min-h-screen min-w-0 antialiased text-slate-100 bg-slate-950;
+  min-height: 100vh;
+  min-width: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(15 23 42);
+  background-color: rgb(248 250 252);
   background-image:
-    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(59, 130, 246, 0.22), transparent),
-    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(168, 85, 247, 0.14), transparent),
-    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(34, 211, 238, 0.1), transparent);
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--page-glow-1), transparent),
+    radial-gradient(ellipse 80% 50% at 100% 0%, var(--page-glow-2), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 100%, var(--page-glow-3), transparent);
+}
+
+html.dark body {
+  color: rgb(241 245 249);
+  background-color: rgb(2 6 23);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, var(--page-glow-1), transparent),
+    radial-gradient(ellipse 80% 50% at 100% 0%, var(--page-glow-2), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 100%, var(--page-glow-3), transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -30,4 +57,30 @@ body {
 pre {
   overflow-x: auto;
   max-width: 100%;
+}
+
+/* Premium card hover (home + shared) */
+.home-tool-card {
+  transition-property: transform, box-shadow, border-color, background-color;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-tool-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+html.dark .home-tool-card:hover {
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.45),
+    0 0 32px -8px rgba(34, 211, 238, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-tool-card:hover {
+    transform: none;
+  }
 }

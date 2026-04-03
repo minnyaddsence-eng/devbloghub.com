@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "All tools",
-  description: `Full directory of ${getTools().length}+ free developer and SEO tools. Search, filter by category, no pagination.`,
+  description: `Full directory of ${getTools().length}+ free developer and SEO tools. Search, filter by category, paginated list.`,
   alternates: { canonical: `${site.url}/tools` },
   openGraph: {
     title: `All tools · ${site.name}`,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 function GridFallback() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-16 text-center text-slate-400" aria-busy="true">
+    <div className="mx-auto max-w-6xl px-4 py-16 text-center text-slate-500 dark:text-slate-400" aria-busy="true">
       Loading directory…
     </div>
   );
@@ -42,11 +42,11 @@ export default function AllToolsPage() {
   return (
     <div className="min-w-0 pb-6 pt-6 sm:pb-8 sm:pt-8">
       <div className="mx-auto max-w-6xl min-w-0 px-3 sm:px-4">
-        <p className="text-sm font-medium uppercase tracking-wide text-cyan-300/90">Directory</p>
-        <h1 className="mt-2 text-balance text-2xl font-bold text-white sm:text-3xl md:text-4xl">All tools</h1>
-        <p className="mt-3 max-w-2xl text-slate-400">
-          Every utility on {site.name} in one place — {tools.length} tools, with search and category filters. On the{" "}
-          <Link href="/" className="text-cyan-300/90 hover:text-cyan-200 hover:underline">
+        <p className="text-sm font-medium uppercase tracking-wide text-sky-700 dark:text-cyan-300/90">Directory</p>
+        <h1 className="mt-2 text-balance text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl dark:text-white">All tools</h1>
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
+          Every utility on {site.name} in one place — {tools.length} tools, with search, category filters, and pagination. On the{" "}
+          <Link href="/" className="text-sky-700 hover:text-sky-900 hover:underline dark:text-cyan-300/90 dark:hover:text-cyan-200">
             homepage
           </Link>
           , see Top picks and Trending highlights.
@@ -54,7 +54,7 @@ export default function AllToolsPage() {
       </div>
       <section className="mt-8">
         <Suspense fallback={<GridFallback />}>
-          <ToolGridClient tools={tools} categories={categories} basePath="/tools" paginate={false} />
+          <ToolGridClient tools={tools} categories={categories} basePath="/tools" paginate />
         </Suspense>
       </section>
     </div>

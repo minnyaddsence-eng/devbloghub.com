@@ -32,11 +32,11 @@ export function BrandLogo({
         height={d}
         priority={priority}
         loading={priority ? "eager" : "lazy"}
-        className={`rounded-xl object-contain shadow-lg shadow-sky-900/20 ring-1 ring-white/10 ${SIZE_CLASS[size]}`}
+        className={`rounded-xl object-contain shadow-lg shadow-slate-300/50 ring-1 ring-slate-200/80 dark:shadow-sky-900/20 dark:ring-white/10 ${SIZE_CLASS[size]}`}
       />
       {showBadge ? (
         <span
-          className="pointer-events-none absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-400 px-1 text-[10px] font-black leading-none text-slate-950 shadow ring-2 ring-slate-950"
+          className="pointer-events-none absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-400 px-1 text-[10px] font-black leading-none text-slate-950 shadow ring-2 ring-white dark:ring-slate-950"
           title="Monetization-ready toolkit"
           aria-hidden
         >
