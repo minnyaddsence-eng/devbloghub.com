@@ -1,0 +1,370 @@
+[
+  {
+    "slug": "how-to-format-json-fast",
+    "title": "How to format JSON fast (without ruining your logs)",
+    "description": "A practical, security-minded workflow for pretty-printing JSON during API development and incident triage — plus when not to paste secrets into browser tools.",
+    "date": "2026-04-01",
+    "tags": ["json", "api", "workflow"],
+    "relatedToolSlugs": ["json-formatter", "json-validator", "jwt-decoder"],
+    "sections": [
+      {
+        "heading": "Start from a safe sample",
+        "body": "When debugging production issues, copy the smallest possible repro snippet. Remove tokens, emails, and internal IDs. If you must work with sensitive values, prefer local CLI tooling or an isolated VM rather than a third-party website. DevBlogHub tools aim to execute in-browser, but threat models differ — treat every web page as potentially hostile for crown-jewel secrets."
+      },
+      {
+        "heading": "Pretty print, then diff",
+        "body": "Once you trust the sample, pretty-print to stabilize field order visually. Compare before/after payloads when chasing serialization bugs. Pair formatting with validation so you catch trailing commas or mismatched braces early — especially when logs truncate lines."
+      },
+      {
+        "heading": "Link hygiene for SEO teams",
+        "body": "Technical articles rank better when they connect to working utilities readers can use immediately. Link from explainers to concrete tools (formatters, encoders) and back from tool pages to tutorials. This pattern builds topical authority without relying on thin doorway pages."
+      }
+    ]
+  },
+  {
+    "slug": "client-side-tools-seo-playbook",
+    "title": "A sensible SEO playbook for client-side tool sites",
+    "description": "Why static generation, structured data, and genuine usefulness outperform raw page count — and how to scale programmatic URLs responsibly.",
+    "date": "2026-04-02",
+    "tags": ["seo", "nextjs", "programmatic"],
+    "relatedToolSlugs": ["slug-generator", "word-counter", "query-string-parser"],
+    "sections": [
+      {
+        "heading": "Quality beats volume",
+        "body": "Search engines reward helpful pages. If two URLs differ only by boilerplate, merge them or differentiate with unique examples, FAQs, and user scenarios. Use templates, but leave room for editorial review on high-potential keywords."
+      },
+      {
+        "heading": "Static HTML + fast JS",
+        "body": "Ship static shells so crawlers see meaningful text immediately. Defer interactive logic to client components and keep critical server-rendered copy where it matters. Canonical tags reduce duplicate risk when you offer multiple keyword-oriented URLs."
+      },
+      {
+        "heading": "Structured data that matches the page",
+        "body": "FAQ schema should reflect visible questions. Breadcrumbs should mirror on-page navigation. Misaligned structured data can nullify trust — keep your JSON-LD honest and minimal."
+      }
+    ]
+  },
+  {
+    "slug": "csv-to-json-pipeline-tips",
+    "title": "CSV → JSON pipelines: quoting, headers, and edge cases",
+    "description": "How to turn messy spreadsheets into reliable JSON for APIs and tests, without losing rows to bad quotes or inconsistent encodings.",
+    "date": "2026-03-28",
+    "tags": ["csv", "json", "data"],
+    "relatedToolSlugs": ["csv-to-json", "json-formatter", "json-to-csv"],
+    "sections": [
+      {
+        "heading": "Normalize headers first",
+        "body": "Export CSVs with a single header row and stable column names. Replace spaces with underscores in keys before conversion so downstream code does not need bracket notation everywhere."
+      },
+      {
+        "heading": "Watch for embedded newlines",
+        "body": "Spreadsheet exports sometimes wrap fields in quotes but still break lines. Validate row counts against the source file and sample-parse the worst rows before loading everything into production."
+      }
+    ]
+  },
+  {
+    "slug": "base64-and-data-urls",
+    "title": "Base64 and data URLs: size, caching, and when to avoid them",
+    "description": "Encoding assets as Base64 inflates bytes — learn when inline data URLs help prototypes and when they hurt Core Web Vitals.",
+    "date": "2026-03-26",
+    "tags": ["base64", "performance", "web"],
+    "relatedToolSlugs": ["base64", "hex-encode", "mime-type-lookup"],
+    "sections": [
+      {
+        "heading": "Roughly +33% payload",
+        "body": "Base64 expands binary data. For large images, prefer real URLs with HTTP caching. Data URLs shine for tiny icons, single-file demos, or environments where separate asset hosting is awkward."
+      },
+      {
+        "heading": "Security framing",
+        "body": "Never assume Base64 hides secrets; it is encoding, not encryption. Treat decoded output like any other user-controlled string before passing it into DOM or SQL."
+      }
+    ]
+  },
+  {
+    "slug": "jwt-decode-not-verify",
+    "title": "JWT decode ≠ verify: what browser tools can safely show",
+    "description": "Why decoding a JWT header and payload is fine for debugging, and why verification still belongs on the server with your real keys.",
+    "date": "2026-03-24",
+    "tags": ["jwt", "security", "api"],
+    "relatedToolSlugs": ["jwt-decoder", "pem-decoder", "hmac-helper"],
+    "sections": [
+      {
+        "heading": "Claims are public",
+        "body": "Signed tokens separate integrity from secrecy. Anyone can read standard claims; the signature proves they were not tampered with. Client-side decoders help inspect `exp`, `aud`, and custom fields during integration work."
+      },
+      {
+        "heading": "Keep private keys off the page",
+        "body": "Verification requires trusted secrets. Do not paste production private keys into web forms — use local scripts or your auth provider’s dashboard for rotation and validation tests."
+      }
+    ]
+  },
+  {
+    "slug": "regex-for-log-triage",
+    "title": "Regex workflows for log triage (without catastrophic backtracking)",
+    "description": "Test patterns against samples, anchor sensibly, and know when grep or structured logging beats fancy regular expressions.",
+    "date": "2026-03-22",
+    "tags": ["regex", "logs", "devops"],
+    "relatedToolSlugs": ["regex-tester", "text-diff", "line-sort-dedupe-32"],
+    "sections": [
+      {
+        "heading": "Capture the smallest useful group",
+        "body": "Prefer non-greedy quantifiers and explicit delimiters (request IDs, timestamps) so patterns stay predictable on long lines from load balancers."
+      },
+      {
+        "heading": "Prefer structure at the source",
+        "body": "JSON logs and trace IDs reduce reliance on regex. Use regex as a bridge while you migrate toward queryable fields."
+      }
+    ]
+  },
+  {
+    "slug": "hashing-for-developers",
+    "title": "Hashing for developers: caches, dedupe, and integrity",
+    "description": "When SHA-256 fingerprints help with artifacts, CDN keys, and deduplication — and when you still need a proper MAC or signature.",
+    "date": "2026-03-20",
+    "tags": ["hash", "security", "caching"],
+    "relatedToolSlugs": ["hash-generator", "hmac-helper", "text-diff"],
+    "sections": [
+      {
+        "heading": "Fingerprinting builds",
+        "body": "Content-addressed caches key off hash prefixes. Pick algorithms your tooling agrees on and document whether you use hex or Base64 digests to avoid subtle mismatches between services."
+      },
+      {
+        "heading": "Do not hash passwords here",
+        "body": "Use dedicated password hashing on the server (argon2, scrypt, bcrypt). Generic SHA demos teach structure, not credential storage policy."
+      }
+    ]
+  },
+  {
+    "slug": "url-encoding-primer",
+    "title": "URL encoding: query strings, forms, and plus-sign gotchas",
+    "description": "Why `+` and `%20` disagree, how `encodeURIComponent` differs from form rules, and how to debug bad links quickly.",
+    "date": "2026-03-18",
+    "tags": ["url", "http", "encoding"],
+    "relatedToolSlugs": ["url-encode", "query-string-parser", "canonical-url-builder"],
+    "sections": [
+      {
+        "heading": "Component vs form encoding",
+        "body": "`encodeURIComponent` is the right default for query parameter values. HTML forms application/x-www-form-urlencoded historically treats spaces as `+`, which surprises people pasting URLs between systems."
+      },
+      {
+        "heading": "Round-trip checks",
+        "body": "After encoding, decode once in a trusted tool to confirm you did not double-encode percent sequences — a common bug when stitching marketing UTM tags by hand."
+      }
+    ]
+  },
+  {
+    "slug": "uuids-ulids-and-sorting",
+    "title": "UUIDs vs ULIDs: randomness, sortability, and database indexes",
+    "description": "Pick identifiers that match your storage engine and observability needs — random v4 blobs fragment indexes differently than time-ordered strings.",
+    "date": "2026-03-16",
+    "tags": ["uuid", "identity", "databases"],
+    "relatedToolSlugs": ["uuid-generator", "ulid-generator-52", "nanoid-generator-53"],
+    "sections": [
+      {
+        "heading": "Lexicographic time ordering",
+        "body": "ULIDs embed a timestamp prefix, which helps humans scan logs chronologically when IDs appear as plain text. UUIDv7 offers similar benefits with standard formatting."
+      },
+      {
+        "heading": "Do not reimplement crypto",
+        "body": "Generate identifiers with vetted libraries in production. Online generators are ideal for mock data, load tests, and UI scaffolding."
+      }
+    ]
+  },
+  {
+    "slug": "cron-readability-for-oncall",
+    "title": "Cron expressions: readability for on-call engineers",
+    "description": "Translate schedules into human language before you merge infra changes — daylight saving and timezone mismatches cause most incidents.",
+    "date": "2026-03-14",
+    "tags": ["cron", "devops", "scheduling"],
+    "relatedToolSlugs": ["cron-explainer", "cron-next-runs-93", "timestamp-converter"],
+    "sections": [
+      {
+        "heading": "Pin the timezone explicitly",
+        "body": "Document whether a job uses UTC, a region, or the host clock. Spring and fall DST transitions are where silent skips or double runs appear."
+      },
+      {
+        "heading": "Validate next fire times",
+        "body": "Walk forward a few cycles with a calculator before shipping changes to payment or cleanup jobs."
+      }
+    ]
+  },
+  {
+    "slug": "markdown-for-shipping-docs",
+    "title": "Markdown for technical writers who actually ship",
+    "description": "Preview locally, standardize callouts, and link to runnable examples so READMEs survive the first month of maintenance.",
+    "date": "2026-03-12",
+    "tags": ["markdown", "docs", "collaboration"],
+    "relatedToolSlugs": ["markdown-preview", "markdown-table-generator-44", "readme-toc-generator-65"],
+    "sections": [
+      {
+        "heading": "One source of truth",
+        "body": "Keep diagrams generated from code or checked-in assets with version control. Text diffs should remain reviewable in pull requests."
+      },
+      {
+        "heading": "Cross-link tools",
+        "body": "Link procedures to utilities (formatters, generators) so readers exit documentation with something actionable."
+      }
+    ]
+  },
+  {
+    "slug": "slug-ux-for-routing",
+    "title": "Slugs in URLs: filesystem limits, Unicode, and SEO pragmatism",
+    "description": "Lowercase, hyphens, and length caps keep routes portable across CDNs, Git branches, and analytics exports.",
+    "date": "2026-03-10",
+    "tags": ["routing", "seo", "slug"],
+    "relatedToolSlugs": ["slug-generator", "branch-name-slugger-64", "slug-collision-checker-85"],
+    "sections": [
+      {
+        "heading": "Avoid surprise collisions",
+        "body": "Reserved words (`api`, `admin`, locale codes) should be blocked automatically when generating marketing paths."
+      },
+      {
+        "heading": "Keep redirects when renaming",
+        "body": "Rename slugs with 301 maps so external bookmarks and newsletter links survive content refreshes."
+      }
+    ]
+  },
+  {
+    "slug": "yaml-json-config-migration",
+    "title": "YAML ↔ JSON in config files: footguns and migration tips",
+    "description": "Comments and anchor syntax make YAML pleasant — until implicit typing turns `no` into boolean false.",
+    "date": "2026-03-08",
+    "tags": ["yaml", "json", "config"],
+    "relatedToolSlugs": ["yaml-to-json", "toml-to-json-59", "json-formatter"],
+    "sections": [
+      {
+        "heading": "Quote suspicious scalars",
+        "body": "Country codes, version strings, and on/off knobs should be quoted so parsers do not reinterpret them."
+      },
+      {
+        "heading": "Round-trip through canonical JSON",
+        "body": "When migrating tooling, pretty-print JSON to spot duplicate keys and unexpected nulls removed by serializers."
+      }
+    ]
+  },
+  {
+    "slug": "timestamps-and-timezones",
+    "title": "Debugging timestamps across timezones and leap edges",
+    "description": "Store UTC, render in user locale, and batch-convert when reconciling logs from multi-region fleets.",
+    "date": "2026-03-06",
+    "tags": ["timezone", "logs", "datetime"],
+    "relatedToolSlugs": ["timestamp-converter", "epoch-batch-convert-94", "cron-next-runs-93"],
+    "sections": [
+      {
+        "heading": "Epoch vs ISO strings",
+        "body": "Milliseconds versus seconds bites Node and Python users alike. Document your unit in API contracts and UI labels."
+      },
+      {
+        "heading": "Locale display only",
+        "body": "Convert to local wall clocks for humans, but compare and sort in a single canonical offset during incidents."
+      }
+    ]
+  },
+  {
+    "slug": "html-entities-and-xss-aware-escaping",
+    "title": "HTML entities: escaping text safely in templates",
+    "description": "Know the difference between displaying user input and injecting HTML — entity encoding is one layer, not the whole story.",
+    "date": "2026-03-04",
+    "tags": ["html", "security", "xss"],
+    "relatedToolSlugs": ["html-entities", "markdown-preview", "json-ld-faq-builder-70"],
+    "sections": [
+      {
+        "heading": "Context matters",
+        "body": "Attribute contexts, script blocks, and URLs each need different escaping rules. Framework defaults help, but custom `dangerouslySetInnerHTML` bypasses them."
+      },
+      {
+        "heading": "Test with metacharacters",
+        "body": "`<`, `&`, quotes, and astral Unicode symbols reveal double-encoding bugs faster than happy-path Latin samples."
+      }
+    ]
+  },
+  {
+    "slug": "word-counts-for-content-briefs",
+    "title": "Word counts for briefs, snippets, and meta descriptions",
+    "description": "Use counters to enforce inclusive ranges without keyword stuffing — readers and search snippets both reward tight copy.",
+    "date": "2026-03-02",
+    "tags": ["writing", "seo", "content"],
+    "relatedToolSlugs": ["word-counter", "meta-description-preview-87", "meta-title-length-checker-86"],
+    "sections": [
+      {
+        "heading": "Pair counts with structure",
+        "body": "Headings break scanning on mobile. Aim for one idea per section instead of chasing raw length."
+      },
+      {
+        "heading": "Preview SERP fields",
+        "body": "Title and description simulators catch truncation before you publish — especially after template variables expand."
+      }
+    ]
+  },
+  {
+    "slug": "text-diff-for-reviews",
+    "title": "Text diff habits that speed up code review",
+    "description": "Side-by-side diffs expose accidental whitespace, config drift, and copypaste errors before they merge.",
+    "date": "2026-02-28",
+    "tags": ["git", "review", "diff"],
+    "relatedToolSlugs": ["text-diff", "whitespace-trimmer-35", "find-replace-batch-36"],
+    "sections": [
+      {
+        "heading": "Normalize line endings",
+        "body": "Agree on LF versus CRLF in editorconfig so diff noise does not hide real logic changes."
+      },
+      {
+        "heading": "Spot the accidental deletion",
+        "body": "Large deletes deserve a comment in the PR — bots and humans both miss silent removals in dense files."
+      }
+    ]
+  },
+  {
+    "slug": "color-contrast-quick-checks",
+    "title": "Color contrast: quick checks before you ship UI polish",
+    "description": "WCAG ratios are not theoretical — low-contrast labels fail real users in sunlight and on budget displays.",
+    "date": "2026-02-26",
+    "tags": ["a11y", "color", "design"],
+    "relatedToolSlugs": ["contrast-ratio-quick-96", "color-converter", "color-palette-steps-95"],
+    "sections": [
+      {
+        "heading": "Test text and icons separately",
+        "body": "Thin glyphs and small icons need higher ratios than bold headings. Do not average colors across gradients without sampling worst-case pixels."
+      },
+      {
+        "heading": "Pair with motion preferences",
+        "body": "High contrast helps when users enable reduced motion and rely on static states instead of pulsing cues."
+      }
+    ]
+  },
+  {
+    "slug": "query-string-edge-cases",
+    "title": "Query string edge cases in analytics and deep links",
+    "description": "Arrays, encoding order, and empty values behave differently per framework — normalize before you compare funnels.",
+    "date": "2026-02-24",
+    "tags": ["url", "analytics", "tracking"],
+    "relatedToolSlugs": ["query-string-parser", "canonical-url-builder-68", "open-graph-tag-builder-88"],
+    "sections": [
+      {
+        "heading": "Duplicate keys",
+        "body": "Some servers take the last value, others merge into arrays. Document behavior in shared SDKs."
+      },
+      {
+        "heading": "Strip PII before sharing",
+        "body": "Remove email parameters from example URLs in tickets; use synthetic IDs in screenshots."
+      }
+    ]
+  },
+  {
+    "slug": "lorem-ipsum-in-product-ui",
+    "title": "Lorem ipsum in UI mocks: when it helps and when it hurts",
+    "description": "Placeholder copy tests layout stress — swap in realistic strings early so truncation and line heights reflect real languages.",
+    "date": "2026-02-22",
+    "tags": ["design", "ux", "content"],
+    "relatedToolSlugs": ["lorem-ipsum", "word-counter", "meta-title-length-checker-86"],
+    "sections": [
+      {
+        "heading": "Length variance",
+        "body": "German and Finnish strings run longer than English; include a few multilingual samples before final sign-off."
+      },
+      {
+        "heading": "Decode stage",
+        "body": "Replace ipsum with domain terms before usability tests so participants react to meaning, not novelty."
+      }
+    ]
+  }
+]

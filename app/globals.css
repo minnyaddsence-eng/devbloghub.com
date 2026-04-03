@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+:root {
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  @apply min-h-screen min-w-0 antialiased text-slate-100 bg-slate-950;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(59, 130, 246, 0.22), transparent),
+    radial-gradient(ellipse 80% 50% at 100% 0%, rgba(168, 85, 247, 0.14), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(34, 211, 238, 0.1), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Long lines inside tool output blocks */
+pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
