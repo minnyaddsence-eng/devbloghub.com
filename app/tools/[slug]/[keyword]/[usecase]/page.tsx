@@ -3,13 +3,22 @@ import { notFound } from "next/navigation";
 import { ToolArticle } from "@/components/ToolArticle";
 import { humanizeSeoSlug } from "@/lib/seo-content";
 import { site } from "@/lib/site";
-import { getSeoTriplets, getToolBySlug } from "@/lib/tools";
+import { getToolBySlug } from "@/lib/tools";
 import { getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
 
 type Props = { params: Promise<{ slug: string; keyword: string; usecase: string }> };
 
+/**
+ * Do not pre-render all long-tail combinations at build time (~10k pages) — Vercel deploy size limit.
+ * dynamicParams: URLs not in generateStaticParams are generated on first request, then ISR-cached.
+ */
+export const dynamicParams = true;
+
+/** ISR — revalidate in the background after this interval (seconds). */
+export const revalidate = 86_400; // 24h
+
 export async function generateStaticParams() {
-  return getSeoTriplets();
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -19,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const focus = humanizeSeoSlug(keyword);
   const scenario = getUseCaseTitle(usecase);
   const title = `${focus} — ${scenario} — ${tool.name}`;
-  const description = `${tool.name} for ${focus.toLowerCase()}, ${scenario.toLowerCase()}. ${tool.description} Static page, client-side tool.`;
+  const description = `${tool.name} for ${focus.toLowerCase()}, ${scenario.toLowerCase()}. ${tool.description} Fast, client-side tool.`;
   const url = `${site.url}/tools/${slug}/${keyword}/${usecase}`;
   return {
     title,

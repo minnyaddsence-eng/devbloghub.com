@@ -6,6 +6,9 @@ import { getToolBySlug, getTools } from "@/lib/tools";
 
 type Props = { params: Promise<{ slug: string }> };
 
+/** ISR — refresh cached hub pages periodically without redeploying. */
+export const revalidate = 86_400; // 24h
+
 export async function generateStaticParams() {
   return getTools().map((t) => ({ slug: t.slug }));
 }
