@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteSchemas } from "@/components/SiteSchemas";
 import "./globals.css";
+import { absoluteOgImageUrl, globalSeoKeywords, twitterSiteFromEnv } from "@/lib/seo-config";
 import { site } from "@/lib/site";
 
 const geistSans = Geist({
@@ -22,6 +23,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+const twitterSite = twitterSiteFromEnv();
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -29,15 +32,40 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  formatDetection: { email: false, address: false, telephone: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: site.name,
     url: site.url,
-    title: site.tagline,
+    title: `${site.name} — ${site.tagline}`,
     description: site.description,
+    images: [
+      {
+        url: absoluteOgImageUrl(),
+        width: 512,
+        height: 512,
+        alt: `${site.name} logo`,
+      },
+    ],
   },
-  keywords: ["developer tools", "json formatter", "base64", "jwt decoder", "seo tools", "free tools"],
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+    images: [absoluteOgImageUrl()],
+    ...(twitterSite ? { site: twitterSite, creator: twitterSite } : {}),
+  },
+  keywords: [...globalSeoKeywords],
   icons: {
     icon: "/devbloghub-tools-logo.png",
     apple: "/devbloghub-tools-logo.png",

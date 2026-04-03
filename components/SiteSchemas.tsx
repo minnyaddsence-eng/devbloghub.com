@@ -24,7 +24,7 @@ export function SiteSchemas() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${site.url}/?q={search_term_string}`,
+        urlTemplate: `${site.url}/tools?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },

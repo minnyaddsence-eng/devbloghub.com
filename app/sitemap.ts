@@ -1,3 +1,7 @@
+/**
+ * Native App Router sitemap (build-time). No `next-sitemap` package needed — same outcome for Google.
+ * Submit https://devbloghub.com/sitemap.xml in Search Console.
+ */
 import type { MetadataRoute } from "next";
 import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ToolGridClient } from "@/components/ToolGridClient";
 import { getCategories, getTools } from "@/lib/tools";
+import { absoluteOgImageUrl } from "@/lib/seo-config";
 import { site } from "@/lib/site";
 import Link from "next/link";
 
@@ -15,7 +16,15 @@ export const metadata: Metadata = {
     url: `${site.url}/tools`,
     siteName: site.name,
     type: "website",
+    images: [{ url: absoluteOgImageUrl(), width: 512, height: 512, alt: "All developer tools" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `All tools · ${site.name}`,
+    description: "Search and filter the complete tool list.",
+    images: [absoluteOgImageUrl()],
+  },
+  robots: { index: true, follow: true },
 };
 
 function GridFallback() {

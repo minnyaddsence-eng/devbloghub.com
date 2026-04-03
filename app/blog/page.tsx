@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GlassPanel } from "@/components/GlassPanel";
 import { BLOG_PAGE_SIZE, getBlogPageSlice, getSortedPosts } from "@/lib/blog";
+import { absoluteOgImageUrl } from "@/lib/seo-config";
 import { site } from "@/lib/site";
 
 type Props = { searchParams: Promise<{ page?: string }> };
@@ -9,6 +10,7 @@ type Props = { searchParams: Promise<{ page?: string }> };
 export const metadata: Metadata = {
   title: "Blog — tool guides & workflows",
   description: "Practical articles about JSON, encoding, SEO utilities, and developer productivity tools.",
+  keywords: ["developer blog", "json", "seo tools", "workflows", "tutorials"],
   alternates: { canonical: `${site.url}/blog` },
   openGraph: {
     title: "DevBlogHubTools blog",
@@ -16,7 +18,15 @@ export const metadata: Metadata = {
     url: `${site.url}/blog`,
     siteName: site.name,
     type: "website",
+    images: [{ url: absoluteOgImageUrl(), width: 512, height: 512, alt: `${site.name} blog` }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "DevBlogHubTools blog",
+    description: "Guides and workflows for everyday developer tools.",
+    images: [absoluteOgImageUrl()],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default async function BlogIndexPage({ searchParams }: Props) {

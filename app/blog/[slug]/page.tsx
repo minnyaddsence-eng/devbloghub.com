@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogArticleJsonLd } from "@/components/BlogArticleJsonLd";
 import { GlassPanel } from "@/components/GlassPanel";
 import { getPostBySlug, getPosts } from "@/lib/blog";
+import { absoluteOgImageUrl } from "@/lib/seo-config";
 import { site } from "@/lib/site";
 import { getToolBySlug } from "@/lib/tools";
 
@@ -20,8 +22,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
+    keywords: post.tags,
+    authors: [{ name: site.name, url: site.url }],
     alternates: { canonical: url },
-    openGraph: { title: post.title, description: post.description, url, siteName: site.name, type: "article" },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url,
+      siteName: site.name,
+      type: "article",
+      publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: [site.name],
+      tags: post.tags,
+      images: [{ url: absoluteOgImageUrl(), width: 512, height: 512, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [absoluteOgImageUrl()],
+    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -32,6 +54,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article className="mx-auto max-w-3xl min-w-0 px-3 py-8 sm:px-4 sm:py-12">
+      <BlogArticleJsonLd post={post} />
       <p className="text-sm text-cyan-300/80">Blog · {post.date}</p>
       <h1 className="mt-3 text-balance break-words text-2xl font-bold text-white sm:text-3xl md:text-4xl">
         {post.title}

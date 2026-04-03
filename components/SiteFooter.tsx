@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/BrandLogo";
+import { getToolsInSlugOrder, HOME_TOP_TOOL_SLUGS } from "@/lib/tools";
 import { site } from "@/lib/site";
+
+const footerToolLinks = getToolsInSlugOrder(HOME_TOP_TOOL_SLUGS.slice(0, 8));
 
 export function SiteFooter() {
   return (
@@ -11,6 +14,21 @@ export function SiteFooter() {
           <div className="min-w-0">
             <p className="font-semibold text-white">{site.name}</p>
             <p className="mt-2 break-words text-sm leading-relaxed text-slate-400">{site.description}</p>
+            <p className="mt-4 text-sm font-medium text-slate-200">Popular tools</p>
+            <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5 text-sm text-cyan-300/90">
+              {footerToolLinks.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/tools/${t.slug}`} className="hover:text-cyan-200 hover:underline">
+                    {t.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm">
+              <Link href="/tools" className="text-slate-400 hover:text-cyan-300 hover:underline">
+                All tools →
+              </Link>
+            </p>
           </div>
         </div>
         <div>

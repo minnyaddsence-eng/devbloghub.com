@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ToolArticle } from "@/components/ToolArticle";
 import { humanizeSeoSlug } from "@/lib/seo-content";
+import { absoluteOgImageUrl } from "@/lib/seo-config";
 import { site } from "@/lib/site";
 import { getToolBySlug } from "@/lib/tools";
 import { getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
@@ -35,7 +36,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     keywords: [...tool.keywords, focus, scenario],
     alternates: { canonical: url },
-    openGraph: { title, description, url, siteName: site.name },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: site.name,
+      type: "website",
+      images: [{ url: absoluteOgImageUrl(), width: 512, height: 512, alt: tool.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [absoluteOgImageUrl()],
+    },
+    robots: { index: true, follow: true },
   };
 }
 

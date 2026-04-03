@@ -5,6 +5,7 @@ import { FaqBlock } from "@/components/FaqBlock";
 import { FaqJsonLd } from "@/components/FaqJsonLd";
 import { GlassPanel } from "@/components/GlassPanel";
 import { ToolRunner } from "@/components/ToolRunner";
+import { ToolWebApplicationJsonLd } from "@/components/ToolWebApplicationJsonLd";
 import type { ToolDef } from "@/lib/types";
 import { DEFAULT_USE_CASE_SLUG, getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
 import { site } from "@/lib/site";
@@ -75,6 +76,7 @@ export function ToolArticle({
   return (
     <article className="mx-auto max-w-4xl min-w-0 px-3 py-8 sm:px-4 sm:py-10">
       <BreadcrumbJsonLd items={crumbs} />
+      <ToolWebApplicationJsonLd tool={tool} pageUrl={`${site.url}${canonicalPath}`} />
       <FaqJsonLd items={faqAll} />
       <div className="flex min-w-0 flex-col gap-2">
         <Breadcrumbs items={crumbs} />

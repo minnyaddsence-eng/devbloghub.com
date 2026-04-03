@@ -31,6 +31,7 @@ export function BrandLogo({
         width={d}
         height={d}
         priority={priority}
+        loading={priority ? "eager" : "lazy"}
         className={`rounded-xl object-contain shadow-lg shadow-sky-900/20 ring-1 ring-white/10 ${SIZE_CLASS[size]}`}
       />
       {showBadge ? (
