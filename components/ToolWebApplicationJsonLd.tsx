@@ -1,6 +1,8 @@
 import type { ToolDef } from "@/lib/types";
-import { site } from "@/lib/site";
+import { site, sitePrimaryAuthor } from "@/lib/site";
 import { absoluteOgImageUrl } from "@/lib/seo-config";
+
+const authorId = `${site.url}#primary-author`;
 
 export function ToolWebApplicationJsonLd({ tool, pageUrl }: { tool: ToolDef; pageUrl: string }) {
   const data = {
@@ -10,8 +12,21 @@ export function ToolWebApplicationJsonLd({ tool, pageUrl }: { tool: ToolDef; pag
     description: tool.description,
     url: pageUrl,
     applicationCategory: "DeveloperApplication",
-    operatingSystem: "Any (web browser)",
+    operatingSystem: "Any",
     browserRequirements: "Requires JavaScript",
+    author: {
+      "@type": "Person",
+      "@id": authorId,
+      name: sitePrimaryAuthor.name,
+      jobTitle: sitePrimaryAuthor.jobTitle,
+      description: sitePrimaryAuthor.description,
+      knowsAbout: sitePrimaryAuthor.knowsAbout,
+      worksFor: {
+        "@type": "Organization",
+        name: site.name,
+        url: site.url,
+      },
+    },
     offers: {
       "@type": "Offer",
       price: "0",

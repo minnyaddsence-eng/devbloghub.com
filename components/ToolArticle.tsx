@@ -6,11 +6,14 @@ import { FaqJsonLd } from "@/components/FaqJsonLd";
 import { GlassPanel } from "@/components/GlassPanel";
 import { ToolRunner } from "@/components/ToolRunner";
 import { ToolWebApplicationJsonLd } from "@/components/ToolWebApplicationJsonLd";
+import { UseCaseSpecifications } from "@/components/UseCaseSpecifications";
 import type { ToolDef } from "@/lib/types";
-import { DEFAULT_USE_CASE_SLUG, getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
+import { isValidSeoKeywordForTool } from "@/lib/tools";
+import { DEFAULT_USE_CASE_SLUG, type UseCaseSlug, getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
 import { site } from "@/lib/site";
 import {
   buildHubParagraphs,
+  buildLongTailFaqBundle,
   buildLongTailParagraphs,
   buildSecondaryFaqs,
   humanizeSeoSlug,
@@ -32,7 +35,7 @@ export function ToolArticle({
 }) {
   const longTail =
     keyword != null &&
-    tool.seoSlugs.includes(keyword) &&
+    isValidSeoKeywordForTool(tool, keyword) &&
     useCase != null &&
     isValidUseCaseSlug(useCase);
 
@@ -60,7 +63,10 @@ export function ToolArticle({
 
   const primaryKeyword = longTail ? keyword : tool.seoSlugs[0] ?? tool.slug;
   const extraFaqs = buildSecondaryFaqs(tool, primaryKeyword, longTail ? useCase : undefined);
-  const faqAll = [...tool.faq, ...extraFaqs].slice(0, 8);
+  const longTailFaqs =
+    longTail && keyword && useCase ? buildLongTailFaqBundle(tool, keyword, useCase) : null;
+  const faqAll = longTailFaqs ?? [...tool.faq, ...extraFaqs].slice(0, 8);
+  const askBlockItems = longTailFaqs ?? extraFaqs;
 
   const keywordVariations = longTail
     ? otherKeywordHrefs(tool, keyword, useCase)
@@ -104,6 +110,10 @@ export function ToolArticle({
         </div>
       </GlassPanel>
 
+      {longTail && keyword && useCase ? (
+        <UseCaseSpecifications tool={tool} keyword={keyword} useCase={useCase as UseCaseSlug} />
+      ) : null}
+
       <section className="mt-10 max-w-none space-y-4 break-words text-slate-700 sm:mt-12 dark:text-slate-300">
         <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">
           Why {tool.name} matters for everyday developer work
@@ -115,7 +125,7 @@ export function ToolArticle({
         ))}
         <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl dark:text-white">People also ask (quick answers)</h2>
         <ul className="list-disc space-y-3 pl-6">
-          {extraFaqs.map((f, i) => (
+          {askBlockItems.map((f, i) => (
             <li key={i}>
               <strong className="text-slate-900 dark:text-slate-200">{f.q}</strong> — {f.a}
             </li>

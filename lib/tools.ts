@@ -5,6 +5,31 @@ import { USE_CASE_SLUGS } from "@/lib/use-cases";
 
 const tools = toolsData as ToolDef[];
 
+/**
+ * Extra keyword segments merged into every tool’s long-tail matrix (no tools.json edit required).
+ * Keep slugs lowercase-kebab; total URLs ≈ tools × (|seoSlugs| + |this|) × |USE_CASE_SLUGS|.
+ */
+export const GLOBAL_EXTRA_SEO_SLUGS = [
+  "browser-based-developer-tool",
+  "no-signup-online-utility",
+  "client-side-privacy-friendly-tool",
+  "instant-web-developer-helper",
+  "free-software-engineer-utility",
+  "api-workflow-companion-online",
+  "cross-platform-browser-tool",
+  "lightweight-dev-sandbox-online",
+  "no-install-developer-converter",
+  "quick-format-helper-for-developers",
+] as const;
+
+export function getExpandedSeoSlugsForTool(tool: ToolDef): string[] {
+  return [...new Set([...tool.seoSlugs, ...GLOBAL_EXTRA_SEO_SLUGS])];
+}
+
+export function isValidSeoKeywordForTool(tool: ToolDef, keyword: string): boolean {
+  return getExpandedSeoSlugsForTool(tool).includes(keyword);
+}
+
 export function getTools(): ToolDef[] {
   return tools;
 }
@@ -67,11 +92,11 @@ export function getSeoPairs(): { slug: string; seoSlug: string }[] {
   return pairs;
 }
 
-/** 100 tools × 10 keywords × 10 use cases = 10,000 long-tail URLs */
+/** Long-tail URLs: each tool × expanded keywords × all use-case slugs (see GLOBAL_EXTRA_SEO_SLUGS). */
 export function getSeoTriplets(): { slug: string; keyword: string; usecase: UseCaseSlug }[] {
   const out: { slug: string; keyword: string; usecase: UseCaseSlug }[] = [];
   for (const t of tools) {
-    for (const keyword of t.seoSlugs) {
+    for (const keyword of getExpandedSeoSlugsForTool(t)) {
       for (const usecase of USE_CASE_SLUGS) {
         out.push({ slug: t.slug, keyword, usecase });
       }

@@ -4,7 +4,7 @@ import { ToolArticle } from "@/components/ToolArticle";
 import { humanizeSeoSlug } from "@/lib/seo-content";
 import { absoluteOgImageUrl } from "@/lib/seo-config";
 import { site } from "@/lib/site";
-import { getToolBySlug } from "@/lib/tools";
+import { getToolBySlug, isValidSeoKeywordForTool } from "@/lib/tools";
 import { getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
 
 type Props = { params: Promise<{ slug: string; keyword: string; usecase: string }> };
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, keyword, usecase } = await params;
   const tool = getToolBySlug(slug);
-  if (!tool || !tool.seoSlugs.includes(keyword) || !isValidUseCaseSlug(usecase)) return {};
+  if (!tool || !isValidSeoKeywordForTool(tool, keyword) || !isValidUseCaseSlug(usecase)) return {};
   const focus = humanizeSeoSlug(keyword);
   const scenario = getUseCaseTitle(usecase);
   const title = `${focus} — ${scenario} — ${tool.name}`;
@@ -57,6 +57,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ToolLongTailPage({ params }: Props) {
   const { slug, keyword, usecase } = await params;
   const tool = getToolBySlug(slug);
-  if (!tool || !tool.seoSlugs.includes(keyword) || !isValidUseCaseSlug(usecase)) notFound();
+  if (!tool || !isValidSeoKeywordForTool(tool, keyword) || !isValidUseCaseSlug(usecase)) notFound();
   return <ToolArticle tool={tool} keyword={keyword} useCase={usecase} />;
 }
