@@ -1,6 +1,9 @@
 /**
  * Sitemap index via `generateSitemaps` — long-tail URLs chunked (5k per file).
  * Core routes live in id 0; programmatic URLs from `getSeoTriplets()` in id 1+.
+ *
+ * Root `/sitemap.xml` is served via rewrite → `/api/sitemap-index` (Next omits the index
+ * when `generateSitemaps` is used; see vercel/next.js#77304).
  */
 import type { MetadataRoute } from "next";
 import { getPosts } from "@/lib/blog";
