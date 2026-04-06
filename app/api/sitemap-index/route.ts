@@ -1,11 +1,10 @@
-import { generateSitemaps } from "@/app/sitemap";
-import { PROGRAMMATIC_SEO_REVALIDATE_SEC } from "@/lib/programmatic-isr";
+import { listSitemapShardIds } from "@/lib/sitemap-data";
 import { site } from "@/lib/site";
+import { sitemapIndexCacheControl } from "@/src/app/seo/revalidate";
 
 /**
- * Sitemap index XML. Served at /sitemap.xml via `next.config` rewrite.
- * Next.js omits the root index when `generateSitemaps()` is used (only /sitemap/N.xml).
- * @see https://github.com/vercel/next.js/issues/77304
+ * Sitemap index XML. Served at `/sitemap.xml` via `next.config` rewrite.
+ * Child urlsets: `/sitemap/{n}.xml` → `/api/sitemap-chunk/{n}.xml` (no metadata `app/sitemap.ts`).
  */
 function escapeXml(text: string): string {
   return text
@@ -16,7 +15,7 @@ function escapeXml(text: string): string {
 }
 
 export async function GET() {
-  const maps = await generateSitemaps();
+  const maps = listSitemapShardIds();
   const locs = maps.map(({ id }) => `${site.url}/sitemap/${id}.xml`);
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -26,7 +25,7 @@ ${locs.map((loc) => `  <sitemap><loc>${escapeXml(loc)}</loc></sitemap>`).join("\
   return new Response(body, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": `public, max-age=3600, s-maxage=${PROGRAMMATIC_SEO_REVALIDATE_SEC}`,
+      "Cache-Control": sitemapIndexCacheControl(),
     },
   });
 }

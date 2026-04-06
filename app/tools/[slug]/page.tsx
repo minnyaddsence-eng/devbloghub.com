@@ -7,7 +7,7 @@ import { getToolBySlug, getTools } from "@/lib/tools";
 
 type Props = { params: Promise<{ slug: string }> };
 
-/** ISR — must stay in sync with `lib/programmatic-isr.ts` + `app/sitemap.ts` (Next needs a literal). */
+/** Low-cardinality hub (~#tools); ISR reduces cold renders. Literal = `HUB_AND_METADATA_SITEMAP_ISR_SEC` in `src/app/seo/revalidate.ts`. */
 export const revalidate = 2_592_000; // 30d
 
 export async function generateStaticParams() {

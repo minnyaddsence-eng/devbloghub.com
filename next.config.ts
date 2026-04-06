@@ -15,8 +15,9 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      // Native `generateSitemaps()` does not register /sitemap.xml (GitHub #77304).
       { source: "/sitemap.xml", destination: "/api/sitemap-index" },
+      // Chunked urlsets — avoid Next metadata sitemap (ISR); plain Route Handler + CDN cache.
+      { source: "/sitemap/:file", destination: "/api/sitemap-chunk/:file" },
     ];
   },
 };

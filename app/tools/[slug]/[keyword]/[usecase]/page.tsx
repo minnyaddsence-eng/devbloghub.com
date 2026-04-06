@@ -10,13 +10,11 @@ import { getUseCaseTitle, isValidUseCaseSlug } from "@/lib/use-cases";
 type Props = { params: Promise<{ slug: string; keyword: string; usecase: string }> };
 
 /**
- * Do not pre-render all long-tail combinations at build time (~10k pages) — Vercel deploy size limit.
- * dynamicParams: URLs not in generateStaticParams are generated on first request, then ISR-cached.
+ * High-cardinality long-tail: render dynamically (Pages Router `getServerSideProps` equivalent).
+ * No ISR/`revalidate` — avoids Vercel ISR writes when bots hammer many unique URLs.
  */
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
-
-/** ISR — must stay in sync with `lib/programmatic-isr.ts` + `app/sitemap.ts` (Next needs a literal). */
-export const revalidate = 2_592_000; // 30d
 
 export async function generateStaticParams() {
   return [];
