@@ -1,7 +1,8 @@
 export const site = {
   name: "DevBlogHub",
   domain: "devbloghub.com",
-  url: "https://devbloghub.com",
+  /** Prefer www — matches typical Vercel primary domain & avoids apex→www redirect on sitemap `<loc>` (GSC “Couldn’t fetch”). */
+  url: "https://www.devbloghub.com",
   tagline: "100+ Free Developer & SEO Tools",
   description:
     "Free, fast, client-side developer tools — JSON, Base64, JWT, passwords, and more. Built for SEO, speed, and AdSense-friendly layouts.",
