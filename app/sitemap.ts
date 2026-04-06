@@ -12,6 +12,9 @@ import { getCategories, getSeoTriplets, getTools } from "@/lib/tools";
 
 export const SITEMAP_CHUNK_SIZE = 5000;
 
+/** Next requires a literal; keep equal to `PROGRAMMATIC_SEO_REVALIDATE_SEC` in lib/programmatic-isr.ts. */
+export const revalidate = 2_592_000;
+
 function buildCoreSitemapEntries(last: Date, base: string): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "",

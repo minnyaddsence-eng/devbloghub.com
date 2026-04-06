@@ -1,4 +1,5 @@
 import { generateSitemaps } from "@/app/sitemap";
+import { PROGRAMMATIC_SEO_REVALIDATE_SEC } from "@/lib/programmatic-isr";
 import { site } from "@/lib/site";
 
 /**
@@ -25,7 +26,7 @@ ${locs.map((loc) => `  <sitemap><loc>${escapeXml(loc)}</loc></sitemap>`).join("\
   return new Response(body, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+      "Cache-Control": `public, max-age=3600, s-maxage=${PROGRAMMATIC_SEO_REVALIDATE_SEC}`,
     },
   });
 }

@@ -15,8 +15,8 @@ type Props = { params: Promise<{ slug: string; keyword: string; usecase: string 
  */
 export const dynamicParams = true;
 
-/** ISR — revalidate in the background after this interval (seconds). */
-export const revalidate = 86_400; // 24h
+/** ISR — must stay in sync with `lib/programmatic-isr.ts` + `app/sitemap.ts` (Next needs a literal). */
+export const revalidate = 2_592_000; // 30d
 
 export async function generateStaticParams() {
   return [];
