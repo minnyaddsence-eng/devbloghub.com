@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { MonetagScript } from "@/components/MonetagScript";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteSchemas } from "@/components/SiteSchemas";
@@ -80,6 +81,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`flex min-h-screen flex-col antialiased ${geistSans.className}`}>
         <ThemeProvider>
           <GoogleAnalytics />
+          <MonetagScript />
           <SiteSchemas />
           <SiteHeader />
           <main className="min-w-0 flex-1">{children}</main>
